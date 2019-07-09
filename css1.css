@@ -1,4 +1,17 @@
-
+a {
+	background-color: powderblue;
+	color:black;
+	transition:background-color .5s;
+	text-decoration:none;
+	font-size:25px;
+}
+a.otolink:hover {
+	color:black;
+	background-color:gold;
+}
+a.otolink:visited {
+	background-color:gold;
+}
 body {
 	background-color:black;
 	color:white;
