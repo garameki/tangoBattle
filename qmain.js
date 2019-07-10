@@ -4,9 +4,6 @@
  **
  *************************************/
 
-let hoge = setInterval(function(){clearInterval(hoge);},1);
-let eVideo = void 0;
-
 
 /*******************************************************************
  ** prototype chainを使うための関数
@@ -26,226 +23,37 @@ const inherits = function(childCtor, parentCtor) {
 
 
 
-/*******************************************************************
-**	Ruby風に使うための言語切替クロージャ
-**
-**	インスタンス化	oLang = ManageLang.new(ManageLang.ENGLISH)
-**	クラス変数
-**		英語	ManageLang.ENGLISH
-**		日本語	ManageLang.JAPANESE
-**	インスタンスメソッド
-**		言語設定	oLang.set(ManageLang.JAPANESE)
-**		言語切替	oLang.switch()
 
-*********************************************************************/
-const ManageLang = {
-	ENGLISH:0,
-	JAPANESE:1,
-	new:function(nLang) {
-		const ENG = ManageLang.ENGLISH;
-		const JAP = ManageLang.JAPANESE;
-		let mode = nLang;
-		if (mode != JAP && mode != ENG) console.error('modeInit = ',modeInit,' in ChangeLanguage()');
-		return {
-			set:function(nLang) {
-				/*言語指定*/
-				mode = nLang;
-				if (mode != JAP && mode != ENG) console.error('modeInit = ',modeInit,' in ChangeLanguage()');
-				return mode;
-			},
-			switch:function() {
-				/*言語の切替*/
-				if (mode == ENG) mode = JAP;
-				else if(mode == JAP) mode = ENG;
-				return mode;
-			}
-		};
-	}
-};
-//オブジェクトの中にnew関数を用意して、その中で変数を用意し(クロージャ)、returnでさらに、メソッドの入ったオブジェクトを返すというような構造
-
-/*************************************************************
- **	日英切替ボタンを配置するクラスの親クラス
- **
- **	sVariable	(String)	インスタンスの変数名
- **	elementVideo	(Object)	ビデオのエレメント
- **	elementButton	(Object)	ボタンを配置するdivエレメント
- **	contents	(Array)		二重配列。ここに再生時刻や日英の言葉が入る
- **
- **	切り返した後もフォーカスが続くようにできるようにprototype.numForcusを用意した。
- **
-**************************************************************/
-const ClsButtons = function (sVariable,elementVideo,elementButton,contents) {
-	this.oLang = ManageLang.new(ManageLang.ENGLISH);
-	this.switchLang();/*this.lang , this.size の初期化*/
-	this.elementB = elementButton;
-	this.elementV = elementVideo;
-	this.contents = contents;
-	this.sVariable = sVariable;
-	this.numFocus = 0;/*ボタンの内でフォーカスを受けているものの番号 onfocus時に番号をここに格納する*/
-};
-ClsButtons.prototype.numForcus = 0;/*フォーカスされているボタン*/
-ClsButtons.prototype.switchLang = function() {
-	/**
-		prototype.switchLang()の使用について
-
-		初期化しておくもの
-			this.ENG...配列this.contentsにおける英文の場所
-			this.JAP...配列this.contentsにおける日本語の場所
-
-		切り替わるもの
-			this.size...文字の大きさ
-			this.lang...使われている言語
-	**/
-	if(this.oLang.switch() == ManageLang.ENGLISH) {
-		this.size = 22;
-		this.lang = this.ENG;
-	} else {
-		this.size = 22;
-		this.lang = this.JAP;
-	}
-};
-ClsButtons.prototype.swDraw = function() {
-	this.switchLang();
-	this.draw();
-};
-ClsButtons.prototype.draw = function() {
-	/*ボタンの配置を行う*/
-	/*オーバーライドしてください*/
-};
-
-
-
-
-/* DIALOGUE */
-const ClsConversations2 = function (sVariable,elementVideo,elementButton,contents) {
-	this.TIME = 0;
-	this.PERSON = 1;
-	this.ENG = 2;
-	this.JAP = 3;
-
-	ClsButtons.call(this,sVariable,elementVideo,elementButton,contents);/*ClsButtonsを継承*/
-};
-inherits(ClsConversations2,ClsButtons);/*ClsButtonsを継承*/
-ClsConversations2.prototype.draw = function() {
-	let sHtml = '<br><button class="funcButton" onclick="'+this.sVariable+'.swDraw();">言語切替</button>  <button class="funcButton" onclick="clearInterval(hoge);eVideo.pause();">停止</button><br><br>';
-	sHtml += "<table>";
-	let nBeforePerson = 0;
-	for(let ii=0;ii<this.contents.length-1;ii++) {
-		let pp = this.contents[ii][this.PERSON];
-		if(nBeforePerson != pp) {
-			if(nBeforePerson != 0) {
-				sHtml += "</td></tr>"
-			}
-			sHtml += '<tr><td valign="top" style="padding-top:9px;"><span style="font-weight:900;">' + htmlNames[pp-1] + '</span>:</td><td>';
-			nBeforePerson = pp;
-		}
-		sHtml += '<button class="phrase" id="'+this.sVariable+ii.toString()+'" style="border:solid 0px white;background-color:white;font-size:' + this.size + 'px;" onfocus="'+this.sVariable+'.numFocus='+ii+';" onclick="clearInterval(hoge);'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIME].toString()+';'+this.sVariable+'.elementV.play();hoge = setInterval(function() {'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIME].toString()+';'+this.sVariable+'.elementV.play();},'+((this.contents[ii+1][this.TIME]-this.contents[ii][this.TIME])*1000).toString()+');">'+this.contents[ii][this.lang]+'</button><br>';
-	}
-	sHtml += '</table>';
-
-	sHtml += '<br><button class="funcButton" onclick="'+this.sVariable+'.swDraw();">言語切替</button>  <button class="funcButton" onclick="clearInterval(hoge);eVideo.pause();">停止</button><br><br>';
-	this.elementB.innerHTML = sHtml;
-	if(this.contents.length !=0) document.getElementById(this.sVariable+this.numFocus.toString()).focus();
-};
-
-
-/* BUILD UP YOUR VOCABULARY */
-const ClsVocabularies = function (sVariable,elementVideo,elementButton,contents) {
-	/*配列における場所*/
-	this.TIME_S = 0;
-	this.TIME_E = 1;
-	this.ENG = 2;
-	this.JAP = 3;
-
-	ClsButtons.call(this,sVariable,elementVideo,elementButton,contents);/*ClsButtonsクラスを継承*/
-};
-inherits(ClsVocabularies,ClsButtons);/*ClsButtonsクラスを継承*/
-ClsVocabularies.prototype.draw = function() {
-
-	/*スイッチ*/
-	let sHtml = '<br><button class="funcButton" onclick="'+this.sVariable+'.swDraw();">言語切替</button>  <button class="funcButton" onclick="clearInterval(hoge);eVideo.pause();">停止</button><br><br>';
-	/*ボタン*/
-	for(let ii=0;ii<this.contents.length;ii++) {
-		sHtml += '<button class="phrase" id="'+this.sVariable+ii.toString()+'" style="font-size:' + this.size + 'px;" onfocus="'+this.sVariable+'.numFocus='+ii+';"  onclick="clearInterval(hoge);'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIME_S].toString()+';'+this.sVariable+'.elementV.play();hoge = setInterval(function() {'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIME_S].toString()+';'+this.sVariable+'.elementV.play();},'+((this.contents[ii][this.TIME_E]-this.contents[ii][this.TIME_S])*1000).toString()+');">'+this.contents[ii][this.lang]+'</button><br>';
-	}
-	/*スイッチ*/
-	sHtml += '<br><button class="funcButton" onclick="'+this.sVariable+'.swDraw();">言語切替</button>  <button class="funcButton" onclick="clearInterval(hoge);eVideo.pause();">停止</button><br><br>';
-	/*置き換えとフォーカスしなおし*/
-	this.elementB.innerHTML = sHtml;
-	if(this.contents.length!=0) document.getElementById(this.sVariable+this.numFocus.toString()).focus();
-
-
-};
-
-
-
-/* EXPRESS YOURSELF IN ENGLISH */
-const ClsExpresses = function (sVariable,elementVideo,elementButton,contents) {
-	/*配列 this.contents における場所*/
-	this.TIMEQ_S = 0;
-	this.TIMEQ_E = 1;
-	this.TIMEA_S = 2;
-	this.TIMEA_E = 3;
-	this.ENG = 4;
-
-	ClsButtons.call(this,sVariable,elementVideo,elementButton,contents);/*ClsButtonsクラスから継承*/
-};
-inherits(ClsExpresses,ClsButtons);/*ClsButtonsクラスから継承*/
-ClsExpresses.prototype.draw = function() {
-
-	let sHtml = "";
-	for(let ii=0;ii<this.contents.length;ii++) {
-		/*QUESTION button*/
-		sHtml += '<button onclick="clearInterval(hoge);'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIMEQ_S].toString()+';'+this.sVariable+'.elementV.play();hoge = setInterval(function() {clearInterval(hoge);'+this.sVariable+'.elementV.pause();},'+((this.contents[ii][this.TIMEQ_E]-this.contents[ii][this.TIMEQ_S])*1000).toString()+');">Question No.' + (ii+1).toString() + '</button> ';
-		/*ANSWER button*/
-		sHtml += '<button onclick="clearInterval(hoge);'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIMEA_S].toString()+';'+this.sVariable+'.elementV.play();hoge = setInterval(function() {'+this.sVariable+'.elementV.currentTime='+this.contents[ii][this.TIMEA_S].toString()+';'+this.sVariable+'.elementV.play();},'+((this.contents[ii][this.TIMEA_E]-this.contents[ii][this.TIMEA_S])*1000).toString()+');">Answer</button><br>';
-	}
-	this.elementB.innerHTML = sHtml;
-};
-
-
-
-
-
-
-
-
-
-
-const Words = function(sVariable,elementVideo,elementAns,elementButton,elementList,contents,aCorrect,aIncorrect,aStart,aEnd,sDate,elementEnemyImg,aEnemy,elementHeroImg,aHero) {
-	if(!elementAns.isConnected) {
+const Words = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero) {
+	if(!oElement.answer.isConnected) {
 		console.error('words and phraseの答えを表示するエレメントがありません。');
 	}
-	if(!elementButton.isConnected) {
+	if(!oElement.word.isConnected) {
 		console.error('words and phraseのボタンを表示するエレメントがありません。');
 	}
 	if(contents.length > 0) {
 		/*音*/
-		this.audioC = aCorrect;
-		this.audioI = aIncorrect;
-		this.audioS = aStart;
-		this.audioE = aEnd;
+		this.audioC = oSound.correct;
+		this.audioI = oSound.incorrect;
+		this.audioS = oSound.start;
+		this.audioE = oSound.end;
 		this.sD = sDate;
 
 		this.sVariable = sVariable;
-		this.eV = elementVideo;
-		this.eA = elementAns;
-		this.eB = elementButton;
-		this.eL = elementList;
+		this.eA = oElement.answer;
+		this.eB = oElement.word;
+		this.eL = oElement.list;
 		this.contents = contents;
 
-		this.eE = elementEnemyImg;
+		this.eE = oElement.enemy;
 		this.aE = aEnemy;/*[imgEnemy1,...,imgEnemyBoss]*/
-		this.eH = elementHeroImg;
+		this.eH = oElement.hero;
 		this.aH = aHero;
 		
 		/*this.contentsの場所*/
-		this.TIME_S = 0;
-		this.TIME_E = 1;
-		this.ENG = 3;
-		this.JAP = 2;
-		this.LINK = 4;
+		this.ENG = 0;
+		this.JAP = 1;
+		this.LINK = 2;
 
 		this.nNode = -1;/*マウスがクリックされているノードの絶対番号*/
 
@@ -257,7 +65,7 @@ const Words = function(sVariable,elementVideo,elementAns,elementButton,elementLi
 		this._buttonRandom();
 		this._buttonList();
 
-		this.thresholdScore = 1;
+		this.thresholdScore = 1;/*全部がこのスコア以上になったらクリア*/
 
 		/*敵の表示*/
 		let count = 0;
@@ -476,14 +284,25 @@ Words.prototype._cookieReset = function() {
 		this.entries.push([ii,0]);
 	}
 };
+
 Words.prototype._cookieClear = function() {
+	const date = new Date('1970/1/1');
 	const ids = this._getFromCookie();
 	for(let ii=0;ii<ids.length;ii++) {
-		document.cookie = ids[ii]+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+		//document.cookie = ids[ii]+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+		document.cookie = this.sVariable + this.sD + ids[ii][0]+'=;expires='+ date.toUTCString();
 	}
 	this.entries = [ ];
 
 };
+//Words.prototype._cookieClear = function() {
+//	const ids = this._getFromCookie();
+//	for(let ii=0;ii<ids.length;ii++) {
+//		document.cookie = ids[ii]+'=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+//	}
+//	this.entries = [ ];
+//
+//};
 Words.prototype._cookieCheck = function() {
 	/*scoreがNaNとかになってたらfalseを返す*/
 	const ids = this._getFromCookie();
@@ -503,7 +322,7 @@ Words.prototype._cookieCheck = function() {
 	return flag;
 };
 Words.prototype._returnHTML = function(ii) {
-	return '<div id="forVisible"><button id="'+this.sVariable+this.entries[ii][0].toString()+'" style="font-size:25px;" onmouseout="if(document.activeElement.id == \''+this.sVariable+this.entries[ii][0].toString()+'\') {'+this.sVariable+'.eA.innerText=\'\';clearInterval(hoge);'+this.sVariable+'.eV.pause();}" onmouseup="'+this.sVariable+'.eA.innerText=\'\';clearInterval(hoge);'+this.sVariable+'.eV.pause();" onmousedown="'+this.sVariable+'.nNode='+this.entries[ii][0].toString()+';'+this.sVariable+'.eA.innerHTML=\''+this.contents[this.entries[ii][0]][this.ENG]+'\';clearInterval(hoge);'+this.sVariable+'.eV.pause();'+this.sVariable+'.eV.currentTime='+this.contents[this.entries[ii][0]][this.TIME_S].toString()+';'+this.sVariable+'.eV.play();hoge=setInterval(()=>{clearInterval(hoge);'+this.sVariable+'.eV.pause();},'+((this.contents[this.entries[ii][0]][this.TIME_E]-this.contents[this.entries[ii][0]][this.TIME_S])*1000).toString()+');">'+this.contents[this.entries[ii][0]][this.JAP]+'<span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;'+this.entries[ii][1].toString()+'点</span></button><a class="otolink" href="'+this.contents[this.entries[ii][0]][this.LINK]+'">音</a></div>';
+	return '<div id="forVisible"><button id="'+this.sVariable+this.entries[ii][0].toString()+'" style="font-size:25px;" onmouseout="if(document.activeElement.id == \''+this.sVariable+this.entries[ii][0].toString()+'\') {'+this.sVariable+'.eA.innerText=\'\';}" onmouseup="'+this.sVariable+'.eA.innerText=\'\';" onmousedown="'+this.sVariable+'.nNode='+this.entries[ii][0].toString()+';'+this.sVariable+'.eA.innerHTML=\''+this.contents[this.entries[ii][0]][this.JAP]+'\';">'+this.contents[this.entries[ii][0]][this.ENG]+'<span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;'+this.entries[ii][1].toString()+'点</span></button><a class="otolink" href="'+this.contents[this.entries[ii][0]][this.LINK]+'">音</a></div>';
 };
 Words.prototype._buttonList = function() {
 	/*worse順に並べて表示する*/
@@ -520,11 +339,11 @@ Words.prototype._buttonList = function() {
 	}
 	/*表示*/
 	let sHtml = "";
+	const doc = this.eL.contentDocument;
 	for(let ii=0;ii<num;ii++) {
 		sHtml += this._returnHTML(ii);
 	}
 	this.eL.innerHTML = sHtml;
-
 
 
 };
@@ -561,8 +380,8 @@ const factoryDate = function(oDate) {
 	};
 };
 
-const setTitle = function(element) {
-	element.innerHTML = htmlTitle;
+const setGrade = function(element) {
+	element.innerHTML = htmlGrade;
 };
 
 

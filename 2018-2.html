@@ -5,29 +5,30 @@
 		<link rel="stylesheet" type="text/css" href="css1.css">
 		<script type="application/javascript" src="qmain.js"></script>
 		<script type="application/javascript">
-const htmlTitle = "Grade Pre-2";
-const htmlDateBefore = new Date('2018/2/1');
-const htmlDateToday = new Date('2018/2/2');
-const htmlDateAfter = new Date('2018/2/3');
+const htmlGrade = "英検２級";
+const htmlDate = "2018-2";/*2018年第2回*/
+const htmlLinkPrevious = "#";/*いまのところなし*/
+const htmlLinkNext = "2018-1";
 
 const htmlWords = [
 /*
  [0,1,"","",""]
 ,[0,1,"","",""]
 */
- [0,1,"directly","直接","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=ZD4jXY22K-SkmAWRt7joBQ&q=directory+meaning&oq=directory+meaning&gs_l=psy-ab.3..0i7i30j0j0i7i30l6.58249.59778..60810...0.0..0.256.1377.0j8j1......0....1..gws-wiz.......0i70i249j0i19j0i7i30i19.6n0QYjZaQtM"]
-,[0,1,"hear from A","Aから連絡をもらう",""]
-,[0,1,"historically","歴史的に","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=yjgjXbSGO7OWr7wP2_WJoAY&q=historically+meaning&oq=historically+meaning&gs_l=psy-ab.3...0.0..91...0.0..0.0.0.......0......gws-wiz.XAv8UrhHfG4"]
-,[0,1,"barely","かろうじて","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=xzwjXcyqK5TomAXg6pHwAw&q=barely+meaning&oq=barely+meaning&gs_l=psy-ab.3..0j0i7i30l7.21894.23678..24158...0.0..0.150.812.0j6......0....1..gws-wiz.......0i67j0i67i70i249j0i7i10i30j0i4j0i7i30i19j0i19.hOG7PyxT-1Y"]
-,[0,1,"previously","以前に","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=4DwjXaviO_HUmAXCz7KABg&q=previously+meaning&oq=previously+meaning&gs_l=psy-ab.3..0i7i30l8.16503.18791..19276...0.0..0.148.1189.0j10......0....1..gws-wiz.......0i13j0.VYNiigPYAxY"]
+ ["directly","直接","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=ZD4jXY22K-SkmAWRt7joBQ&q=directory+meaning&oq=directory+meaning&gs_l=psy-ab.3..0i7i30j0j0i7i30l6.58249.59778..60810...0.0..0.256.1377.0j8j1......0....1..gws-wiz.......0i70i249j0i19j0i7i30i19.6n0QYjZaQtM"]
+,["hear from A","Aから連絡をもらう",""]
+,["historically","歴史的に","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=yjgjXbSGO7OWr7wP2_WJoAY&q=historically+meaning&oq=historically+meaning&gs_l=psy-ab.3...0.0..91...0.0..0.0.0.......0......gws-wiz.XAv8UrhHfG4"]
+,["barely","かろうじて","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=xzwjXcyqK5TomAXg6pHwAw&q=barely+meaning&oq=barely+meaning&gs_l=psy-ab.3..0j0i7i30l7.21894.23678..24158...0.0..0.150.812.0j6......0....1..gws-wiz.......0i67j0i67i70i249j0i7i10i30j0i4j0i7i30i19j0i19.hOG7PyxT-1Y"]
+,["previously","以前に","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=4DwjXaviO_HUmAXCz7KABg&q=previously+meaning&oq=previously+meaning&gs_l=psy-ab.3..0i7i30l8.16503.18791..19276...0.0..0.148.1189.0j10......0....1..gws-wiz.......0i13j0.VYNiigPYAxY"]
+/*
 ,[0,1,"feature A","Aを出演させる","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=9DwjXdrWO46Lr7wPrrOgmA0&q=feature+meaning&oq=feature+meaning&gs_l=psy-ab.3..0j0i7i30l7.18498.20032..21536...0.0..0.142.884.0j7......0....1..gws-wiz.......0i67j0i7i30i19j0i13j0i19.h3qLRGvaU1o"]
 ,[0,1,"delete A","Aを削除する",""]
 ,[0,1,"monitor A","Aを監視する",""]
 ,[0,1,"remind A","Aに思い起こさせる",""]
-,[0,1,"imediately","ただちに、すぐに","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=HD4jXd2vDeqKr7wP7pqQoAs&q=immediately+meaning&oq=immediately+meaning&gs_l=psy-ab.3..0i7i30l4j0j0i7i30l3.21722.26323..27323...0.0..0.156.2019.0j16......0....1..gws-wiz.......35i304i39i70i249j0i7i30i19j0i67j0i7i4i30j0i4j0i13.WVvSAIAiHA0"]
+,[0,1,"immediately","ただちに、すぐに","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=HD4jXd2vDeqKr7wP7pqQoAs&q=immediately+meaning&oq=immediately+meaning&gs_l=psy-ab.3..0i7i30l4j0j0i7i30l3.21722.26323..27323...0.0..0.156.2019.0j16......0....1..gws-wiz.......35i304i39i70i249j0i7i30i19j0i67j0i7i4i30j0i4j0i13.WVvSAIAiHA0"]
 ,[0,1,"urgent","急を要する","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=OD4jXYGtGIeXr7wP6_yWuAM&q=urgent+meaning&oq=urgent+meaning&gs_l=psy-ab.3..0i7i30l5j0j0i7i30l2.17192.18138..18435...0.0..0.232.891.0j5j1......0....1..gws-wiz.......0i7i4i30j0i7i30i19j0i19j0i13.Au9Jm3mXAww"]
-,[0,1,"relative","比較上の",""]
-,[0,1,"generous","寛大な","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Sz4jXevAIo65mAXEzIvoDQ&q=generous+meaning&oq=generous+meaning&gs_l=psy-ab.3..0j0i7i30l2j0i7i10i30j0i7i30l4.22763.24312..24490...0.0..1.329.1530.0j4j3j1......0....1..gws-wiz.......0i13.ji_WPUK7oBc"]
+,[0,1,"relative","相対的な、比較上の",""]
+,[0,1,"generous","心が広い、寛大な","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Sz4jXevAIo65mAXEzIvoDQ&q=generous+meaning&oq=generous+meaning&gs_l=psy-ab.3..0j0i7i30l2j0i7i10i30j0i7i30l4.22763.24312..24490...0.0..1.329.1530.0j4j3j1......0....1..gws-wiz.......0i13.ji_WPUK7oBc"]
 ,[0,1,"cruel","残酷な","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Cz0jXeSLDuuVr7wP2cyHmAo&q=cruel+meaning&oq=cruel+meaning&gs_l=psy-ab.3..0i7i30l3j0j0i7i30l4.16124.17596..18168...0.0..0.149.635.0j5......0....1..gws-wiz.......0i7i30i19j0i13.re4oyB2dFxI"]
 ,[0,1,"celebration","お祝い","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Hj0jXZHyCLCSr7wP7I2e6AE&q=celebration+meaning&oq=celebration+meaning&gs_l=psy-ab.3..0i7i30i19l7j0i19.15083.23448..24177...3.0..0.209.2436.0j17j1......0....1..gws-wiz.......0i7i10i30i19j0i13j0j0i67j0i7i4i30j0i7i30j0i7i4i30i19.QKPNmTblNjY"]
 ,[0,1,"foundation","基礎、財団",""]
@@ -37,7 +38,7 @@ const htmlWords = [
 ,[0,1,"whisper","ささやき",""]
 ,[0,1,"deposit","頭金","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Nj0jXd_cPI_c0gT4p6iwCg&q=deposit+meaning&oq=deposit+meaning&gs_l=psy-ab.3..0j0i7i30l7.18137.19980..20216...0.0..0.147.886.0j7......0....1..gws-wiz.......0i7i30i19j0i13.4loUOiVW0iY"]
 ,[0,1,"apology","謝罪","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=TD0jXenMAs2smAWe4bFQ&q=apology+meaning&oq=apology+meaning&gs_l=psy-ab.3..0i7i30l6j0j0i7i30.19084.21166..21923...0.0..0.168.975.0j7......0....1..gws-wiz.......0i67i70i249j0i4j0i7i30i19j0i19j0i13.Z241vAG5jxM"]
-,[0,1,"deceive","騙す(だます)",""]
+,[0,1,"deceive A","Aを騙す(だます)",""]
 ,[0,1,"establish A","Aを設立する","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Yz0jXcIM57KYBa79q6gO&q=establish+meaning&oq=establish+meaning&gs_l=psy-ab.3..0i7i30j0j0i7i30l6.24686.27161..27490...0.0..0.158.1399.0j11......0....1..gws-wiz.......0i67j0i13j0i7i30i19j0i7i4i30i19.g8uXZ5r27hU"]
 ,[0,1,"endure A","Aに耐える","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=fz0jXce_B5HdmAXr9LzAAw&q=endure+meaning&oq=endure+meaning&gs_l=psy-ab.3..0i7i30l4j0j0i7i30l3.20807.23446..23878...0.0..0.185.936.0j7......0....1..gws-wiz.......0i30j0i19j0i8i7i30i19j0i8i7i10i30i19j0i13j0i8i7i30j0i13i70i249j0i13i30.EpQeZqp1uoM"]
 ,[0,1,"dispose A","Aを配置する",""]
@@ -49,15 +50,15 @@ const htmlWords = [
 ,[0,1,"currency","通貨、流通","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=2j0jXciAB4OkmAWq04mACg&q=currency+meaning&oq=currency+meaning&gs_l=psy-ab.3..0j0i7i30l7.34098.35602..36963...0.0..0.193.1121.0j8......0....1..gws-wiz.......0i7i4i30j0i7i30i19j0i7i4i30i19j0i19.fCEn5vHGbeo"]
 ,[0,1,"envelope","封筒","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=_z0jXavYNqa2mAW6oJuIDw&q=envelope+meaning&oq=envelope+meaning&gs_l=psy-ab.3..0i7i30l6j0j0i7i30.24934.26795..27586...0.0..0.171.1124.0j8......0....1..gws-wiz.......0i67j0i4j0i13i70i249j0i19i70i249j0i7i10i30i19j0i7i30i19j0i7i10i30j0i7i10i30i19i70i249.aoKyzgy-JhA"]
 ,[0,1,"quarrel","口論",""]
-,[0,1,"handle A and B at the same time","","AとBを同時にこなす"]
-,[0,1,"remove","取り除く",""]
+,[0,1,"handle A and B at the same time","AとBを同時にこなす",""]
+,[0,1,"remove A","Aを取り除く",""]
 ,[0,1,"excuse A from B","AをBの義務から免除する",""]
 ,[0,1,"detect A","Aを検出する、Aを見つける",""]
 ,[0,1,"original","元の",""]
 ,[0,1,"restore A","Aを修復する",""]
 ,[0,1,"accompany A","Aに伴って起こる",""]
 ,[0,1,"punish A","Aを罰する",""]
-,[0,1,"compare A with B","AとBを比較する",""]
+,[0,1,"compare A with B","AをBと比較する",""]
 ,[0,1,"from time to time","時々",""]
 ,[0,1,"in demand","需要がある",""]
 ,[0,1,"in common","共通の",""]
@@ -67,7 +68,7 @@ const htmlWords = [
 ,[0,1,"stand over A","Aを監督する",""]
 ,[0,1,"stand up","立ち上がる",""]
 ,[0,1,"stand by","待機する、そばにいる",""]
-,[0,1,"in the meantime","その間に",""]
+,[0,1,"in the meantime","そうしている間に",""]
 ,[0,1,"to some extent","ある程度",""]
 ,[0,1,"at any cost","どんな犠牲を払ってでも",""]
 ,[0,1,"on the contrary","それどころか",""]
@@ -83,11 +84,7 @@ const htmlWords = [
 ,[0,1,"regret to (do)","残念ながら～する",""]
 ,[0,1,"regret (do)ing","～したことを後悔する",""]
 ,[0,1,"inform A of B","AにBについて知らせる",""]
-,[0,1,"","",""]
-,[0,1,"","",""]
-,[0,1,"","",""]
-,[0,1,"","",""]
-,[0,1,"","",""]
+*/
 ];
 
 
@@ -103,42 +100,25 @@ onload = function() {
 	aStart.src = '../eikaiwa/oto/gong.mp3';
 	const aEnd = new Audio();
 	aEnd.src = '../eikaiwa/oto/gong3.mp3';
+	const oSound = {
+		correct:aCorrect,
+		incorrect:aIncorrect,
+		start:aStart,
+		end:aEnd
+	};
 
 	let ele;
 
-	/* 当日 */
-	oDate = factoryDate(htmlDateToday);
-		/* タイトルの日付 */
-		ele = document.getElementById('date');
-		ele.innerText = oDate.inJapanese;
-		/* video のファイル名の日付 */
-		Video = function (){/*Videoエレメントのダミー*/
-			return {
-				pause:function() { },
-				play:function() { },
-				currentTime:0
-			};
-		};
-		eVideo = new Video();
-		eVideo.pause();
-//		ele = document.getElementsByTagName('body')[0];
-//		let sHtml = ele.innerHTML;
-//		sHtml = '<video controls id="video" width="420" height="300"><source src="oto/' + oDate.forFilename + '.mp4"></video>' + sHtml;
-//		ele.innerHTML = sHtml;
-	/* 前日 */
-	oDate = factoryDate(htmlDateBefore);
-		/* リンク */
-		ele = document.getElementById('before');
-		ele.href = oDate.forFilename + '.html';
-	/* 翌日 */
-	oDate = factoryDate(htmlDateAfter);
-		/* リンク */
-		ele = document.getElementById('after');
-		ele.href = oDate.forFilename + '.html';
+	/* 前回リンク */
+	ele = document.getElementById('previous');
+	ele.href = htmlLinkPrevious;
+	/* 次回リンク */
+	ele = document.getElementById('next');
+	ele.href = htmlLinkNext;
 
 	/* タイトル */
-	ele = document.getElementById('htitle');
-	setTitle(ele);
+	ele = document.getElementById('grade');
+	ele.innerHTML = htmlGrade+"&nbsp;"+htmlDate;
 
 	/*battle fieldの用意*/
 	const eFieldDiv = document.getElementById('battleField');
@@ -152,6 +132,14 @@ onload = function() {
 	eWordsAns = document.getElementById('wordsans');
 	const eWordsList = document.getElementById('wordslist');
 	const eWords = document.getElementById('words');
+
+	const oElement = {
+		word:eWords,
+		answer:eWordsAns,
+		list:eWordsList,
+		enemy:eEnemy,
+		hero:eHero
+	};
 	const aEnemy = [
 	 'images/bahamutoTori.png'
 	,'images/senshi.png'
@@ -160,19 +148,15 @@ onload = function() {
 	const aHero = [
 		'images/senshi.png'
 	];
-	/*下の一行はconst,let,varを使わずにグローバルにしてください。または、グローバルで指定しておいてください。*/
-	quest191 = new Words('quest191',eVideo,eWordsAns,eWords,eWordsList,htmlWords,aCorrect,aIncorrect,aStart,aEnd,factoryDate(htmlDateToday).forFilename,eEnemy,aEnemy,eHero,aHero);
+	/*下の一行はconst,let,varを使わずにグローバルにしてください。または、グローバルスコープ内においてletで定義しておいてください。*/
+	quest1 = new Words('quest1',htmlWords,oElement,oSound,htmlDate,aEnemy,aHero);
 
 };
 
 		</script>
 	</head>
 	<body>
-		<h1>過去問クエスト</h1>
-		<h1 id="htitle" style="display:inline;"></h1>
-		～<h1 id="date" style="display:inline;"></h1>～
-		<h1>バハムートへの挑戦状</h1>
-
+		<h1 id="grade" style="display:inline;"></h1>
 		<div id="battleField" style="background-color:black;">
 				<img id="enemy">
 				<img id="mahouE" src="images/senshi.png">
@@ -183,9 +167,9 @@ onload = function() {
 
 		<div id="words"></div>
 		<div id="wordsans">　</div>
-		<div id="wordslist"></div>
+		<div id="wordslist" style="width:100%;"></div>
 
-		<center><a id="before">前日</a>&nbsp;&nbsp;&nbsp;<a id="after">翌日</a>
+		<center><a id="previous">前回</a>&nbsp;&nbsp;&nbsp;<a id="next">次回</a>
 		</center>
 		<br><br><br>
 
