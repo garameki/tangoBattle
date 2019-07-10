@@ -26,10 +26,10 @@ const inherits = function(childCtor, parentCtor) {
 
 const Words = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero) {
 	if(!oElement.answer.isConnected) {
-		console.error('words and phraseの答えを表示するエレメントがありません。');
+		console.error('答えを表示するエレメントがありません。');
 	}
 	if(!oElement.word.isConnected) {
-		console.error('words and phraseのボタンを表示するエレメントがありません。');
+		console.error('問題ボタンを表示するエレメントがありません。');
 	}
 	if(contents.length > 0) {
 		/*音*/

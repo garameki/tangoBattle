@@ -10,7 +10,7 @@ const htmlDate = "2018-2";/*2018年第2回*/
 const htmlLinkPrevious = "#";/*いまのところなし*/
 const htmlLinkNext = "2018-1";
 
-const htmlWords = [
+const wordsQ1 = [
 /*
  [0,1,"","",""]
 ,[0,1,"","",""]
@@ -88,7 +88,7 @@ const htmlWords = [
 ];
 
 
-let words;/*words and phrasesのクイズ用*/
+let quest1,quest2,quest3,quest4,quest5,quest6;
 let eWordsAns;/*words and phrasesの答え表示用 古いスクリプトの為にグローバルに残してある。(onmousedownでグローバルに使うから)*/
 onload = function() {
 	
@@ -148,8 +148,13 @@ onload = function() {
 	const aHero = [
 		'images/senshi.png'
 	];
-	/*下の一行はconst,let,varを使わずにグローバルにしてください。または、グローバルスコープ内においてletで定義しておいてください。*/
-	quest1 = new Words('quest1',htmlWords,oElement,oSound,htmlDate,aEnemy,aHero);
+	/*下の一行はconst,let,varを使わずにグローバルにしてください。または、グローバルスコープ内においてletで定義しておいてください。onclick等のイベントで参照します。*/
+	quest1 = new Words('quest1',wordsQ1,oElement,oSound,htmlDate+'q1',aEnemy,aHero);/* 大問1  */
+	quest2 = new Words('quest2',wordsQ2,oElement,oSound,htmlDate+'q2',aEnemy,aHero);/* 大問2A */
+	quest3 = new Words('quest3',wordsQ3,oElement,oSound,htmlDate+'q3',aEnemy,aHero);/* 大問2B */
+	quest4 = new Words('quest4',wordsQ4,oElement,oSound,htmlDate+'q4',aEnemy,aHero);/* 大問3A */
+	quest5 = new Words('quest5',wordsQ5,oElement,oSound,htmlDate+'q5',aEnemy,aHero);/* 大問3B */
+	quest6 = new Words('quest6',wordsQ6,oElement,oSound,htmlDate+'q6',aEnemy,aHero);/* 大問3C */
 
 };
 
