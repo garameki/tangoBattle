@@ -57,7 +57,7 @@ button {
 	font-family:serif;
 }
 .wordsButton {
-	position:relative;
+	position:unset;
 	font-size:30px;
 	background-color:limegreen;
 }
@@ -69,6 +69,7 @@ button {
 		background-color:white;
 }
 #wordsans {
+	float:right;
 	letter-spacing:1px;
 	font-family:serif;
 	border:solid 2px;
@@ -76,4 +77,9 @@ button {
 	font-size:50px;
 	font-weight:bold;
 	height:160px;
+	width:50%;
 }
+#words {
+	float:left;
+}
+
