@@ -24,6 +24,14 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 		this.aE = aEnemy;/*[imgEnemy1,...,imgEnemyBoss]*/
 		this.eH = oElement.hero;
 		this.aH = aHero;
+		/*魔法用エレメント*/
+		this.eME = oElement.mahouEnemy;
+		this.eMH = oElement.mahouHero;
+		this.eME.width = '20';
+		this.eME.height = '20';
+		this.mE = new Canv(this.eME);
+		this.mH = new Canv(this.eMH);
+		this.mE.puwa();
 		
 		/*配列this.contentsの場所*/
 		this.ENG = 0;

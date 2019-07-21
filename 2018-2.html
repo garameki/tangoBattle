@@ -7,6 +7,7 @@
 		<script type="application/javascript" src="battle.js"></script>
 		<script type="application/javascript" src="image_ext.js"></script>
 		<script type="application/javascript" src="battles.js"></script>
+		<script type="application/javascript" src="canvas_ext.js"></script>
 		<script type="application/javascript">
 
 
@@ -250,7 +251,9 @@ onload = function() {
 		enemy:document.getElementById('enemy'),
 		hero:document.getElementById('hero'),
 		battleField:document.getElementById('battleField'),
-		title:document.getElementById('title')
+		title:document.getElementById('title'),
+		mahouEnemy:document.getElementById('mahouE'),
+		mahouHero:document.getElementById('mahouH')
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
 	battles.store('(1)','201821',q1,oSound1,aEnemyFuuin,hero1,bg1);
@@ -308,9 +311,9 @@ onload = function() {
 		<h1 id="title" style="display:inline;"></h1>
 		<div id="battleField" style="background-color:black;">
 				<img id="enemy">
-				<img id="mahouE" src="images/senshi.png">
+				<canvas id="mahouE" src="images/senshi.png" style="display:inline;"></canvas>
 				<img id="hero" >
-				<img id="mahouH" src="images/senshi.png">
+				<canvas id="mahouH" src="images/senshi.png" style="display:inline;"></canvas>
 			<div class="clearFloat"></div>
 		</div>
 
