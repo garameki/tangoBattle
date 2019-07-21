@@ -188,31 +188,37 @@ Battle.prototype._search = function(nNum) {
 };
 Battle.prototype._buttonRandom = function() {
 
-	let ans=0;
-	let nn=0;
-	for(let ii=0;ii<this.contents.length;ii++) {
-		if(this.entries[ii][1] < this.thresholdScore) {
-			nn++;
-		}
+	const len = this.contents.length;
+	let ii,nnn,min=1000,max=-1000;
+	for(ii=0;ii<len;ii++) {
+		nnn = this.entries[ii][1];
+		if(min > nnn) min = nnn;
+		if(max < nnn) max = nnn;
 	}
-
-	const max = nn*(nn+1)*(2*nn+1)/6;
-	const pp = Math.round(Math.random() * max - 0.5);
-	let sum = 0;
-	for(let kk=1;kk<=nn;kk++) {
-		sum += kk * kk;
-		if(sum > pp) {
-			ans = nn - kk;
-			break;
-		}
+//	console.log('min=',min,'max=',max);
+	let value,sum=0;
+	const aLineups = [ ];
+	for(ii=0;ii<len;ii++) {
+		value = max - this.entries[ii][1] + 1;
+		sum += value * value;
+		aLineups.push(sum);
 	}
+//	console.log('sum=',sum);
+	const nRnd = Math.round(Math.random() * sum);
+//	console.log('nRnd=',nRnd);
+	for(ii=0;ii<len;ii++) {
+//		console.log('aLineups[',ii,']=',aLineups[ii],this.contents[this.entries[ii][0]][0]);
+		if(aLineups[ii] >= nRnd) break;
+	}
+	const ans = ii;
+//	console.log('ans=',ans);
 
 	/************************************************************
 	一様分布/
 //	let ans = Math.round(Math.random() * nn - 0.5);
 	**************************************************************/
 
-	if(ans >= nn) console.error('ans=',ans,'Battle.prototype._buttonRandom()');
+	if(ans >= len) console.error('ans=',ans,'Battle.prototype._buttonRandom()');
 	this._button(ans);
 };
 Battle.prototype._getFromCookie = function() {
