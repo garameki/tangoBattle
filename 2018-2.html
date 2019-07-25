@@ -9,6 +9,7 @@
 		<script type="application/javascript" src="battles.js"></script>
 		<script type="application/javascript" src="canvas_ext.js"></script>
 		<script type="application/javascript" src="attack.js"></script>
+		<script type="application/javascript" src="monster.js"></script>
 		<script type="application/javascript">
 
 
@@ -284,34 +285,44 @@ const q38 = [
 ];
 
 
-
+const goblin = 		new Monster('images/fuuinGoblin.png',[taiatari],[1]);
+const eyefang = 	new Monster('images/fuuinEyefang.png',[taiatari],[1]);
+const kabancle = 	new Monster('images/fuuinKabancle.png',[taiatari],[1]);
+const landturtle = 	new Monster('images/fuuinLandturtle.png',[taiatari],[1]);
+const people = 		new Monster('images/fuuinPeople1.png',[mahou,taiatari],[0.1,0.9]);
+const tori = 		new Monster('images/bahamutoTori.png',[taiatari],[1]);
+const senshi = 		new Monster('images/senshi.png',[mahou],[1]);
+const bahamuto = 	new Monster('images/bahamuto.png',[mahou],[1]);
+const bahamuto2 = 	new Monster('images/bahamuto2.png',[mahou],[1]);
+const oonezumi = 	new Monster('images/oonezumi.png',[taiatari],[1]);
 
 
 
 
 /*各シーンの敵の設定*/
-const aEnemyFuuin = [
- 'images/fuuinGoblin.png'
-,'images/fuuinEyefang.png'
-,'images/fuuinKabancle.png'
+const aEnemyFuuin1 = [
+	goblin
+];
+const aEnemyFuuin2 = [
+	eyefang,
+	kabancle
 ];
 const aEnemyFuuinBoss = [
- 'images/fuuinLandturtle.png'
-,'images/fuuinPeople1.png'
+	landturtle
 ];
-
-const aEnemy2 = [
- 'images/bahamutoTori.png'
-,'images/senshi.png'
-,'images/bahamuto.png'
+const aEnemyBahamuto = [
+	tori,
+	senshi,
+	people
 ];
-
-const aEnemyBossBahamuto = [
- 'images/bahamuto2.png'
+const aEnemyBahamutoBoss1 = [
+	bahamuto
 ];
-
-const aEnemyBossOonezumi = [
- 'images/oonezumi.png'
+const aEnemyBahamutoBoss2 = [
+	bahamuto2
+];
+const aEnemyNeptBoss2 = [
+	oonezumi
 ];
 
 
@@ -388,28 +399,33 @@ onload = function() {
 		mahouHero:document.getElementById('mahouH')
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
-	battles.store('(1)','201821',q1,oSound1,aEnemyFuuin,hero1,bg1);
-	battles.store('(2)','201822',q2,oSound2,aEnemyFuuin,hero1,bg2);
-	battles.store('(3)','201822',q3,oSound2,aEnemyFuuin,hero1,bg2);
-	battles.store('(4)','201822',q4,oSound2,aEnemyFuuin,hero1,bg2);
-	battles.store('(5)','201822',q5,oSound2,aEnemyFuuinBoss,hero1,bg2);
-	battles.store('(6)','201822',q6,oSound2,aEnemyFuuinBoss,hero1,bg2);
-	battles.store('(7)','201822',q7,oSound2,aEnemyFuuinBoss,hero1,bg2);
-	battles.store('(8)','201822',q8,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(9)','201822',q9,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(10)','201822',q10,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(11)','201822',q11,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(12)','201822',q12,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(13)','201822',q13,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(14)','201822',q14,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(15)','201822',q15,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(16)','201822',q16,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(17)','201822',q17,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(18)','201822',q18,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(19)','201822',q19,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(20)','201822',q20,oSound2,aEnemy2,hero1,bg2);
-	battles.store('(21)','201822',q21,oSound2,aEnemyBossBahamuto,hero1,bg2);
-	battles.store('(22)','201822',q22,oSound2,aEnemyBossOonezumi,hero2,bg2);
+	battles.store('(1)','201821',q1,oSound1,aEnemyFuuin1,hero1,bg1);
+	/*
+	battles.store('(2)','201822',q2,oSound2,aEnemyFuuin1,hero1,bg2);
+	battles.store('(3)','201822',q3,oSound2,aEnemyFuuin1,hero1,bg2);
+	battles.store('(4)','201822',q4,oSound2,aEnemyFuuin1,hero1,bg2);
+	battles.store('(5)','201822',q5,oSound2,aEnemyFuuin1,hero1,bg2);
+	*/
+	battles.store('(6)','201822',q6,oSound2,aEnemyFuuin2,hero1,bg2);
+	/*
+	battles.store('(7)','201822',q7,oSound2,aEnemyFuuin1,hero1,bg2);
+	battles.store('(8)','201822',q8,oSound2,aEnemyFuuin1,hero1,bg2);
+	battles.store('(9)','201822',q9,oSound2,aEnemyFuuin2,hero1,bg2);
+	battles.store('(10)','201822',q10,oSound2,aEnemyFuuin2,hero1,bg2);
+	battles.store('(11)','201822',q11,oSound2,aEnemyFuuin2,hero1,bg2);
+	battles.store('(12)','201822',q12,oSound2,aEnemyFuuin2,hero1,bg2);
+	battles.store('(13)','201822',q13,oSound2,aEnemyFuuin2,hero1,bg2);
+	battles.store('(14)','201822',q14,oSound2,aEnemyFuuin2,hero1,bg2);
+	*/
+	battles.store('(15)','201822',q15,oSound2,aEnemyFuuinBoss,hero1,bg2);
+	battles.store('(16)','201822',q16,oSound2,aEnemyBahamuto,hero1,bg2);
+	battles.store('(17)','201822',q17,oSound2,aEnemyBahamuto,hero1,bg2);
+	battles.store('(18)','201822',q18,oSound2,aEnemyBahamuto,hero1,bg2);
+	battles.store('(19)','201822',q19,oSound2,aEnemyBahamuto,hero1,bg2);
+	battles.store('(20)','201822',q20,oSound2,aEnemyBahamuto,hero1,bg2);
+	battles.store('(21)','201822',q21,oSound2,aEnemyBahamutoBoss1,hero1,bg2);
+	battles.store('(22)','201822',q22,oSound2,aEnemyBahamutoBoss2,hero2,bg2);
+	battles.store('(23)','201822',q23,oSound2,aEnemyNeptBoss2,hero2,bg2);
 	battles.start();
 
 };

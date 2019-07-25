@@ -21,7 +21,8 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 		this.contents = contents;
 
 		this.eE = oElement.enemy;
-		this.aE = aEnemy;/*[imgEnemy1,...,imgEnemyBoss]*/
+//		this.aE = aEnemy;/*[imgEnemy1,...,imgEnemyBoss]*/
+		this.aE = aEnemy;/*[Monster,Monster,....]*/
 		this.eH = oElement.hero;
 		this.aH = aHero;
 		/*魔法用エレメント*/
@@ -55,11 +56,14 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 
 		/*敵の表示*/
 		const nn = Math.round(Math.random()*(this.aE.length)-0.5);
-		this.eE.appearElement(this.aE[nn],0,Image.MIDDLE,100);
+		this.monster = this.aE[nn];
+//		this.eE.appearElement(this.aE[nn],0,Image.MIDDLE,100);
+		this.eE.appearElement(this.monster.fname,0,Image.MIDDLE,100);
 		this.mE.appearElement(0,Canv.MIDDLE,100);
 
 		/*主人公の表示*/
 		this.eH.appearElement(this.aH[0],0,Image.MIDDLE,-100);
+
 	}
 
 };
@@ -67,7 +71,7 @@ Battle.prototype._button = function(num) {
 	let sHtml = "errorが発生しました";
 	if(num < this.contents.length) {
 			sHtml = this._returnHTML(num);
-			sHtml += '<br><button class="wordsButton" onclick="'+this.sVariable+'.correct();">正解</button><button class="wordsButton" style="left:50px;" onclick="'+this.sVariable+'.incorrect();">不正解</button><br><button class="wordsButton" style="left:300px;margin-top:30px;" onclick="'+this.sVariable+'.audioS.play();'+this.sVariable+'._cookieReset();'+this.sVariable+'._buttonList();'+this.sVariable+'._buttonRandom();'+this.sVariable+'.eE.appearElement('+this.sVariable+'.aE[Math.round(Math.random() * ('+this.sVariable+'.aE.length) -0.5)],0,Image.MIDDLE,100);'+this.sVariable+'.flagBoss=false;">スコアクリア</button>';
+			sHtml += '<br><button class="wordsButton" onclick="'+this.sVariable+'.correct();">正解</button><button class="wordsButton" style="left:50px;" onclick="'+this.sVariable+'.incorrect();">不正解</button><br><button class="wordsButton" style="left:300px;margin-top:30px;" onclick="'+this.sVariable+'.audioS.play();'+this.sVariable+'._cookieReset();'+this.sVariable+'._buttonList();'+this.sVariable+'._buttonRandom();'+this.sVariable+'.monster = '+this.sVariable+'.aE[Math.round(Math.random()*'+this.sVariable+'.aE.length) -0.5)];'+this.sVariable+'.eE.appearElement('+this.sVariable+'.monster.fname,0,Image.MIDDLE,100);">スコアクリア</button>';
 	} else {
 		console.error('num = ',num,'this.contents.length = ',this.contents.length,98498);
 	}
@@ -163,21 +167,10 @@ Battle.prototype.incorrect = function() {
 		this._buttonRandom();
 		this.audioI.pause();
 		this.audioC.pause();
-		/*敵との距離*/
+		/*敵の攻撃*/
 		this.dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;/*call内で使う*/
-		
-		const pattern = 2;
-		switch(pattern) {
-			case 0:
-				/*体当たり*/
-				taiatari.call(this);
-				break;
-			case 2:
-				/*魔法*/
-				mahou.call(this);
-				break;
-			default:
-		};
+		this.monster.attack(this);
+		/*cookie処理*/
 		let date = new Date();
 		date.setFullYear(date.getFullYear()+1);
 		let num = this._search(this.nNode);
