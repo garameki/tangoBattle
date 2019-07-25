@@ -71,7 +71,7 @@ Battle.prototype._button = function(num) {
 	let sHtml = "errorが発生しました";
 	if(num < this.contents.length) {
 			sHtml = this._returnHTML(num);
-			sHtml += '<br><button class="wordsButton" onclick="'+this.sVariable+'.correct();">正解</button><button class="wordsButton" style="left:50px;" onclick="'+this.sVariable+'.incorrect();">不正解</button><br><button class="wordsButton" style="left:300px;margin-top:30px;" onclick="'+this.sVariable+'.audioS.play();'+this.sVariable+'._cookieReset();'+this.sVariable+'._buttonList();'+this.sVariable+'._buttonRandom();'+this.sVariable+'.monster = '+this.sVariable+'.aE[Math.round(Math.random()*'+this.sVariable+'.aE.length) -0.5)];'+this.sVariable+'.eE.appearElement('+this.sVariable+'.monster.fname,0,Image.MIDDLE,100);">スコアクリア</button>';
+			sHtml += '<br><button class="wordsButton" onclick="'+this.sVariable+'.correct();">正解</button><button class="wordsButton" style="left:50px;" onclick="'+this.sVariable+'.incorrect();">不正解</button><br><button class="wordsButton" style="left:300px;margin-top:30px;" onclick="'+this.sVariable+'.audioS.play();'+this.sVariable+'._cookieReset();'+this.sVariable+'._buttonList();'+this.sVariable+'._buttonRandom();'+this.sVariable+'.monster = '+this.sVariable+'.aE[Math.round(Math.random()*'+this.sVariable+'.aE.length -0.5)];'+this.sVariable+'.eE.appearElement('+this.sVariable+'.monster.fname,0,Image.MIDDLE,100);">スコアクリア</button>';
 	} else {
 		console.error('num = ',num,'this.contents.length = ',this.contents.length,98498);
 	}
