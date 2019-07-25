@@ -8,6 +8,7 @@
 		<script type="application/javascript" src="image_ext.js"></script>
 		<script type="application/javascript" src="battles.js"></script>
 		<script type="application/javascript" src="canvas_ext.js"></script>
+		<script type="application/javascript" src="attack.js"></script>
 		<script type="application/javascript">
 
 
@@ -137,7 +138,7 @@ const q15 = [
 const q16 = [
  ["lose face","面目を失う、(恥ずかしくて)人に顔を合わせられない",""]
 ,["client","顧客"] 
-,["lose lost lose","「失う」の活用"]
+,["「失う」の活用","lose lost lost"]
 ,["badly","(副詞)下手に"]
 
 
@@ -152,27 +153,142 @@ const q17 = [
 ,["insist on A","Aを主張する",""]
 ];
 const q18 = [
- ["despire A","Aにもかかわらず",""]
+ ["despite A","Aにもかかわらず",""]
+, ["despire A","Aを派遣する",""]
 ,["take place","発生する、起こる、<ruby>催<rt>もよお</rt></ruby>される"] 
 ,["in spite of A","Aにもかかわらず",""]
 ,["spite","悪意"]
 ,["inside A","Aの内側で"]
 ];
 const q19 = [
- ["lonely","さみしさ"]
-,["invite A over","Aを(こっちに来るように)誘う"]
+ ["lonely","さみしさ",""]
+,["invite A over","Aを(こっちに来るように)誘う",""]
+,["as planed","予定どうりに",""]
 ];
 const q20 = [
  ["regret to (do)","残念ながら～する",""]
 ,["regret (do)ing","～したことを後悔する",""]
 ,["inform A of B","AにBについて知らせる",""]
 ];
-const q21 = [];
-const q22 = [];
-const q23 = [];
-const q24 = [];
-const q25 = [];
-const q26 = [];
+const q21 = [
+["although","～にもかかわらず"]
+,["varieties of banana","バナナの種類"]
+,["type","型"]
+,["however","しかし"]
+,["not always","[部分否定]必ずしも～とは限らない、いつも～というわけではない"]
+,["true","真実"]
+,["until ～","～まで"]
+,["fungus","真菌類、菌類"]
+,["disease","病気","https://www.google.com/search?q=disease+meaning&rlz=1C1CHBD_jaJP787JP787&oq=disease+meaning&aqs=chrome..69i57j0l5.3869j1j7&sourceid=chrome&ie=UTF-8"]
+,["company","会社"]
+,["no longer","もはや...しない"]
+,["instead","代わりに"]
+,["in contrast with A","Aとは違って、Aとは対照的に"]
+,["for instance","例えば=for example"]
+,["instance","例、事実"]
+,["unfortunately","運悪く"]
+,["additionally","加えて"]
+];
+const q22 = [
+["affect A","Aに影響を及ぼす"]
+,["desease","病気"]
+,["recently","最近"]
+,["in part","部分,一部分,一部"]
+,["reach","到達する、届く"]
+,["luckily","幸いにも、運よく"]
+,["nevertheless [/nɛvəðəˈlɛs/]","それにもかかわらず","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=Z2I4Xdr2Ha6Jr7wP3bCh8Ak&q=nevertheless+meaning&oq=nevertheless+meaning&gs_l=psy-ab.3..0i7i30l8.707318.710277..710357...0.0..0.153.1474.0j11......0....1..gws-wiz.......0i67j0i7i10i30j0i13j0i203j0i7i30i19.1vfJBlSkk4k&ved=0ahUKEwiaxp7c2c3jAhWuxIsBHV1YCJ4Q4dUDCAo&uact=5"]
+,["expart","専門家、熟練者"]
+,["in response to A [/ríspάns/]","Aに応じて、Aに呼応して","https://www.google.com/search?q=response+meaning&rlz=1C1CHBD_jaJP787JP787&oq=response+meaning&aqs=chrome..69i57j0l5.4659j1j7&sourceid=chrome&ie=UTF-8"]
+,["replace A","Aを置き換える"]
+,["as + 節","～のように"]
+];
+const q23 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q24 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q25 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q26 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q27 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q28 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q29 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q30 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q31 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q32 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q33 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q34 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q35 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q36 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q37 = [
+["",""]
+,["",""]
+,["",""]
+];
+const q38 = [
+["",""]
+,["",""]
+,["",""]
+];
+
+
+
+
+
+
+
 /*各シーンの敵の設定*/
 const aEnemyFuuin = [
  'images/fuuinGoblin.png'
@@ -190,9 +306,25 @@ const aEnemy2 = [
 ,'images/bahamuto.png'
 ];
 
+const aEnemyBossBahamuto = [
+ 'images/bahamuto2.png'
+];
+
+const aEnemyBossOonezumi = [
+ 'images/oonezumi.png'
+];
+
+
+
+
+
+
+
+
+
 /*各シーンのヒーローの画像*/
 const hero1 = 'images/senshi.png';
-const hero2 = 'images/senshi.png';
+const hero2 = 'images/senshiKobito.png';
 
 /* SOUNDの読み込み */
 const aSword = new Audio();
@@ -257,50 +389,29 @@ onload = function() {
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
 	battles.store('(1)','201821',q1,oSound1,aEnemyFuuin,hero1,bg1);
-	battles.store('(2)','201822',q2,oSound2,aEnemyFuuin,hero2,bg2);
-	battles.store('(3)','201822',q3,oSound2,aEnemyFuuin,hero2,bg2);
-	battles.store('(4)','201822',q4,oSound2,aEnemyFuuin,hero2,bg2);
-	battles.store('(5)','201822',q5,oSound2,aEnemyFuuinBoss,hero2,bg2);
-	battles.store('(6)','201822',q6,oSound2,aEnemyFuuinBoss,hero2,bg2);
-	battles.store('(7)','201822',q7,oSound2,aEnemyFuuinBoss,hero2,bg2);
-	battles.store('(8)','201822',q8,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(9)','201822',q9,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(10)','201822',q10,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(11)','201822',q11,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(12)','201822',q12,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(13)','201822',q13,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(14)','201822',q14,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(15)','201822',q15,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(16)','201822',q16,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(17)','201822',q17,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(18)','201822',q18,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(19)','201822',q19,oSound2,aEnemy2,hero2,bg2);
-	battles.store('(20)','201822',q20,oSound2,aEnemy2,hero2,bg2);
+	battles.store('(2)','201822',q2,oSound2,aEnemyFuuin,hero1,bg2);
+	battles.store('(3)','201822',q3,oSound2,aEnemyFuuin,hero1,bg2);
+	battles.store('(4)','201822',q4,oSound2,aEnemyFuuin,hero1,bg2);
+	battles.store('(5)','201822',q5,oSound2,aEnemyFuuinBoss,hero1,bg2);
+	battles.store('(6)','201822',q6,oSound2,aEnemyFuuinBoss,hero1,bg2);
+	battles.store('(7)','201822',q7,oSound2,aEnemyFuuinBoss,hero1,bg2);
+	battles.store('(8)','201822',q8,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(9)','201822',q9,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(10)','201822',q10,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(11)','201822',q11,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(12)','201822',q12,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(13)','201822',q13,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(14)','201822',q14,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(15)','201822',q15,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(16)','201822',q16,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(17)','201822',q17,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(18)','201822',q18,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(19)','201822',q19,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(20)','201822',q20,oSound2,aEnemy2,hero1,bg2);
+	battles.store('(21)','201822',q21,oSound2,aEnemyBossBahamuto,hero1,bg2);
+	battles.store('(22)','201822',q22,oSound2,aEnemyBossOonezumi,hero2,bg2);
 	battles.start();
 
-/*
-	let nn,count=0;
-	let nn0=0;
-	let nn1=0;
-	let nn2=0;
-	let nn3=0;
-	let nn4=0;
-	let nn5=0;
-	let nnO=0;
-	const hogeRnd = setInterval(()=>{
-		if(++count > 10000)clearInterval(hogeRnd);
-		nn = Math.round(Math.random() * 5 - 0.5);
-		if(nn == 0) nn0++;
-		else if(nn == 1) nn1++;
-		else if(nn == 2) nn2++;
-		else if(nn == 3) nn3++;
-		else if(nn == 4) nn4++;
-		else if(nn == 5) nn5++;
-		else nnO++;
-		eWordsAns.innerHTML = 
-		'0:'+nn0.toString()+'<br>'+'1:'+nn1.toString()+'<br>'+'2:'+nn2.toString()+'<br>'+'3:'+nn3.toString()+'<br>'+'4:'+nn4.toString()+'<br>'+'5:'+nn5.toString()+'<br>other:'+nnO.toString();
-	},1);
-*/
 };
 
 

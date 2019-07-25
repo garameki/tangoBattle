@@ -58,39 +58,41 @@ Image.prototype.disappear = function(time) {
  ** 呼び出し時にtopを指定してください
  ** element.parentNodeは<div>が好ましいです。<div>タグで囲んでおくことを推奨します。
  *********************************************************/
-Image.prototype.vibrate = function() {
-	const wide = 15;/*揺れ幅*/
-	const beforeLeft = this.style.left;
-	const left = Number(beforeLeft.match(/\-*\d+(?:\.\d+)*/)[0]);
-	const beforeTop = this.style.top;
-	const top = Number(beforeTop.match(/\-*\d+(?:\.\d+)*/)[0]);
-	const height = this.height;
-	let parentHeight = this.parentNode.offsetHeight;
-	let sTop = 'top:'+ ((parentHeight - height)*0.5).toString() + 'px;';
-	const sPos = 'position:relative;';
-	let sLeft;
-	let count = 0;
-	const myself = this;
-	const hogeVib = setInterval(()=>{
-		count++;
-		if(count > 10) {
-			clearInterval(hogeVib);
-			sLeft = 'left:' + beforeLeft +';';
-			sTop = 'top:' + beforeTop + ';';
-		} else {
-			sLeft = 'left:' + Math.round(left + wide - Math.random()*wide*2).toString() + 'px;';
-			sTop = 'top:' + Math.round(top + wide - Math.random()*wide * 2).toString() + 'px;';
-			lr = false;
-		}
-		myself.style = 'position:relative;' + sLeft + sTop;
-	},50);
+Image.prototype.vibrate = function(dTime) {
+	const fugaVib = setTimeout(()=>{
+		const wide = 15;/*揺れ幅*/
+		const beforeLeft = this.style.left;
+		const left = Number(beforeLeft.match(/\-*\d+(?:\.\d+)*/)[0]);
+		const beforeTop = this.style.top;
+		const top = Number(beforeTop.match(/\-*\d+(?:\.\d+)*/)[0]);
+		const height = this.height;
+		let parentHeight = this.parentNode.offsetHeight;
+		let sTop = 'top:'+ ((parentHeight - height)*0.5).toString() + 'px;';
+		const sPos = 'position:relative;';
+		let sLeft;
+		let count = 0;
+		const myself = this;
+		const hogeVib = setInterval(()=>{
+			count++;
+			if(count > 10) {
+				clearInterval(hogeVib);
+				sLeft = 'left:' + beforeLeft +';';
+				sTop = 'top:' + beforeTop + ';';
+			} else {
+				sLeft = 'left:' + Math.round(left + wide - Math.random()*wide*2).toString() + 'px;';
+				sTop = 'top:' + Math.round(top + wide - Math.random()*wide * 2).toString() + 'px;';
+				lr = false;
+			}
+			myself.style = 'position:relative;' + sLeft + sTop;
+		},50);
+	},dTime);
 };
 
 /*************************************************
  ** Image エレメントを往復させる
  ** あらかじめtopとleftを指定してから呼び出すこと
 **************************************************/
-Image.prototype.move = function(xx,yy,time) {
+Image.prototype.goback = function(xx,yy,time) {
 	let sLeft='',sTop='';
 	const div = 10;/*コマの数*/
 	const beforeTop = this.style.top;

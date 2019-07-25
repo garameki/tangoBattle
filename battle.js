@@ -27,11 +27,10 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 		/*魔法用エレメント*/
 		this.eME = oElement.mahouEnemy;
 		this.eMH = oElement.mahouHero;
-		this.eME.width = '20';
-		this.eME.height = '20';
+		this.eME.width = '68';
+		this.eME.height = '68';
 		this.mE = new Canv(this.eME);
 		this.mH = new Canv(this.eMH);
-		this.mE.puwa();
 		
 		/*配列this.contentsの場所*/
 		this.ENG = 0;
@@ -57,6 +56,7 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 		/*敵の表示*/
 		const nn = Math.round(Math.random()*(this.aE.length)-0.5);
 		this.eE.appearElement(this.aE[nn],0,Image.MIDDLE,100);
+		this.mE.appearElement(0,Canv.MIDDLE,100);
 
 		/*主人公の表示*/
 		this.eH.appearElement(this.aH[0],0,Image.MIDDLE,-100);
@@ -113,10 +113,10 @@ Battle.prototype.correct = function() {
 			}
 		}
 
-		this.eE.vibrate();
+		this.eE.vibrate(0);
 		/*敵との距離*/
 		const dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;
-		this.eH.move(-dist,0,0.1);
+		this.eH.goback(-dist,0,0.1);
 		if(flag) {
 			/*セクションのすべての単語をマスター*/
 			/*一匹やっつけた*/
@@ -127,15 +127,15 @@ Battle.prototype.correct = function() {
 			const myself = this;
 			const hogeJump1 = setInterval(()=>{
 				clearInterval(hogeJump1);
-				myself.eH.move(0,-100,0.1);
+				myself.eH.goback(0,-100,0.1);
 			},1100);
 			const hogeJump2 = setInterval(()=>{
 				clearInterval(hogeJump2);
-				myself.eH.move(0,-100,0.1);
+				myself.eH.goback(0,-100,0.1);
 			},1350);
 			const hogeJump3 = setInterval(()=>{
 				clearInterval(hogeJump3);
-				myself.eH.move(0,-100,0.1);
+				myself.eH.goback(0,-100,0.1);
 			},1600);
 			
 			/*次の敵*/
@@ -158,16 +158,26 @@ Battle.prototype.correct = function() {
 	}
 };
 Battle.prototype.incorrect = function() {
+	const myself = this;
 	if(this.nNode != -1) {
 		this._buttonRandom();
 		this.audioI.pause();
 		this.audioC.pause();
-		this.audioI.currentTime = 0;
-		this.audioI.play();
 		/*敵との距離*/
-		const dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;
-		this.eE.move(dist,0,0.1);
-		this.eH.vibrate();
+		this.dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;/*call内で使う*/
+		
+		const pattern = 2;
+		switch(pattern) {
+			case 0:
+				/*体当たり*/
+				taiatari.call(this);
+				break;
+			case 2:
+				/*魔法*/
+				mahou.call(this);
+				break;
+			default:
+		};
 		let date = new Date();
 		date.setFullYear(date.getFullYear()+1);
 		let num = this._search(this.nNode);
@@ -293,7 +303,7 @@ Battle.prototype._cookieCheck = function() {
 	return flag;
 };
 Battle.prototype._returnHTML = function(ii) {
-	return '<div id="forVisible"><button id="'+this.sVariable+this.entries[ii][0].toString()+'" style="font-size:25px;" onmouseout="if(document.activeElement.id == \''+this.sVariable+this.entries[ii][0].toString()+'\') {'+this.sVariable+'.eA.innerText=\'\';}" onmouseup="'+this.sVariable+'.eA.innerText=\'\';" onmousedown="'+this.sVariable+'.nNode='+this.entries[ii][0].toString()+';'+this.sVariable+'.eA.innerHTML=\''+this.contents[this.entries[ii][0]][this.JAP]+'\';">'+this.contents[this.entries[ii][0]][this.ENG]+'<span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;'+this.entries[ii][1].toString()+'点</span></button><a class="otolink" href="'+this.contents[this.entries[ii][0]][this.LINK]+'">音</a></div>';
+	return '<div id="forVisible"><button id="'+this.sVariable+this.entries[ii][0].toString()+'" style="font-size:25px;" onmouseout="if(document.activeElement.id == \''+this.sVariable+this.entries[ii][0].toString()+'\') {'+this.sVariable+'.eA.innerText=\'\';}" onmouseup="'+this.sVariable+'.eA.innerText=\'\';" onmousedown="'+this.sVariable+'.nNode='+this.entries[ii][0].toString()+';'+this.sVariable+'.eA.innerHTML=\''+this.contents[this.entries[ii][0]][this.JAP]+'\';">'+this.contents[this.entries[ii][0]][this.ENG]+'<span style="color:red;">&nbsp;&nbsp;&nbsp;&nbsp;'+this.entries[ii][1].toString()+'点</span></button><a class="otolink" target="pronounciation" href="'+this.contents[this.entries[ii][0]][this.LINK]+'">音</a></div>';
 };
 Battle.prototype._buttonList = function() {
 	/*worse順に並べて表示する*/
