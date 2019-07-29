@@ -277,14 +277,57 @@ const q24 = [
 ["heal","<ruby>癒<rt>いや</rt></ruby>す"],
 ];
 const q25 = [
-["",""]
-,["",""]
-,["",""]
+["for example","例えば"]
+,["resercher","研究者"]
+,["MRI(magnetic resonance imaging)","核磁気共鳴画像装置"]
+,["exam A","Aを試す"]
+,["brain","脳"]
+,["receive","受ける"]
+,["electric","電気的な"]
+,["ankle","足首"]
+,["relate to A","Aに関係する"]
+,["fear [/fiə/","恐れ"]
+,["active","活発な(act[動詞]の形容詞形)"]
+,["feel felt felt","feelの活用"]
+,["keep kept kept","keepの活用"]
+,["feel","感じる"]
+,["pain","痛み"]
+,["drop","下がる"]
+,["less ～","少しも～ない"]
+,["even","～でさえ"]
+,["stranger","他者"]
+,["degree","度、程度"]
+,["activity","活動(act[動詞]の名詞形)"]
+,["but... also ...","...だけでなく...も"]
 ];
 const q26 = [
-["",""]
-,["",""]
-,["",""]
+["study","研究"]
+,["efect","効果"]
+,["look at A","Aを見る"]
+,["massage","マッサージ"]
+,["one A","あるA"]
+,["cause A","Aを引き起こす"]
+,["decrease[/díːkriːs/]","減らす"]
+,["increase[/íŋkriːs/]","増やす","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=5FI_XdypGdTomAWR7qHgCQ&q=increase+meaning&oq=increase+meaning&gs_l=psy-ab.3..0i7i30l6j0i203j0i7i30.63716.65434..65732...0.0..0.149.1022.0j8......0....1..gws-wiz.......0i7i4i30j0i67j0i4j0j0i13j0i7i30i19j0i19.jeAcAFw031A&ved=0ahUKEwjcq9f099rjAhVUNKYKHRF3CJwQ4dUDCAo&uact=5"]
+,["certain A","あるA"]
+,["cytokine[sʌ́ɪtəkʌɪn]","(脳内物質の一種)サイトカイン"]
+,["reason","理由"]
+,["as usual","いつもどうりに"]
+,["even so + 節","...といえども、(＝nevertheless ..., =in spite of ...)"]
+,["bad worse worst","badの活用"]
+,["to make matters worse","さらに悪いことに、"]
+,["particularly","特に"]
+,["helpful","役に立つ"]
+,["suffer from A","(病気など)Aに悩む,Aに苦しむ"]
+,["frequent","頻繁な,断続的な"]
+,["autoimmune","自己免疫の","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=8lc_XenqJIv7-Qby1LFA&q=autoimmune+meaning&oq=autoimmune+meaning&gs_l=psy-ab.3..0i203l8.49265.51203..51305...0.0..0.138.970.0j8......0....1..gws-wiz.......35i39i70i255j0.zx6r_4cG5Xg&ved=0ahUKEwjpq-bd_NrjAhWLfd4KHXJqDAgQ4dUDCAo&uact=5"]
+,["disorder","障がい","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=tlg_XdWQJsnX-Qat6JnwAQ&q=disorders+meaning&oq=disorders+meaning&gs_l=psy-ab.3..0i203l8.496279.498729..498866...0.0..0.165.1203.0j9......0....1..gws-wiz.......35i39i70i255j0i13.5sAZRrIdXQU&ved=0ahUKEwjVw6K7_drjAhXJa94KHS10Bh4Q4dUDCAo&uact=5"]
+,["autoimmune disorder","自己免疫疾患(免疫が自分の体を攻撃する病気)"]
+,["in response to A","Aに応じて、Aに答えて"]
+,["treat A","Aを扱う"]
+,["both A and B","AとB両方"]
+,["mental","精神の(⇔physical)"]
+,["physical","体の(⇔mental)、物質の、物理の"]
 ];
 const q27 = [
 ["",""]
@@ -372,8 +415,8 @@ const aEnemyKasuzu = [
 ];
 /*サスーン城*/
 const zonbi =	new Monster('images/sasunZonbi.png',[taiatari],[1]);
-const darkeye =	new Monster('images/kasuzuDarkeye.png',[taiatari],[1]);
-const grifon =	new Monster('images/kasuzuGrifon.png',[taiatari],[1]);
+const darkeye =	new Monster('images/sasunDarkeye.png',[taiatari],[1]);
+const grifon =	new Monster('images/sasunGrifon.png',[taiatari],[1]);
 const aEnemySasun = [
 	zonbi,
 	darkeye
@@ -418,10 +461,14 @@ const aEnemyBahamutoBoss2 = [
 /*ネプト神殿*/
 const puti =		new Monster('images/neptPuti.png',[taiatari],[1]);
 const bloodworm =	new Monster('images/neptBloodworm.png',[taiatari],[1]);
+const riripatto =	new Monster('images/neptRiripatto.png',[taiatari],[1]);
+const wearatto =	new Monster('images/neptWearatto.png',[taiatari],[1]);
 const oonezumi = 	new Monster('images/oonezumi.png',[taiatari],[1]);
 const aEnemyNept = [
 	bloodworm,
-	puti
+	puti,
+	riripatto,
+	wearatto
 ];
 const aEnemyNeptBoss = [
 	oonezumi
@@ -460,7 +507,6 @@ onload = function() {
 		mahouHero:document.getElementById('mahouH')
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
-	/*
 	//祭壇の洞窟
 	battles.store('(1)','201821',q1,oSound1,aEnemySaidan1,hero1,bg1);
 	battles.store('(2)','201822',q2,oSound2,aEnemySaidan1,hero1,bg2);
@@ -481,7 +527,6 @@ onload = function() {
 	battles.store('(12)','201822',q12,oSound2,aEnemyFuuin1,hero1,bg2);
 	battles.store('(13)','201822',q13,oSound2,aEnemyFuuin2,hero1,bg2);
 	battles.store('(14)','201822',q14,oSound2,aEnemyFuuin2,hero1,bg2);
-	*/
 	battles.store('(23)','201822',q23,oSound2,aEnemyFuuinBoss,hero2,bg2);
 	//サスーン カヌー
 	battles.store('(15)','201822',q15,oSound2,aEnemySasun,hero1,bg2);
@@ -490,13 +535,11 @@ onload = function() {
 	battles.store('(17)','201822',q17,oSound2,aEnemyBahamuto,hero1,bg2);
 	battles.store('(18)','201822',q18,oSound2,aEnemyBahamuto,hero1,bg2);
 	battles.store('(24)','201822',q24,oSound2,aEnemyBahamutoBoss1,hero1,bg2);
-	/*
 	battles.store('(25)','201822',q25,oSound2,aEnemyBahamutoBoss2,hero1,bg2);
 	//ネプト神殿
 	battles.store('(19)','201822',q19,oSound2,aEnemyNept,hero2,bg2);
 	battles.store('(20)','201822',q20,oSound2,aEnemyNept,hero2,bg2);
 	battles.store('(26)','201822',q26,oSound2,aEnemyNeptBoss,hero2,bg2);
-	*/
 	
 	battles.start();
 };
