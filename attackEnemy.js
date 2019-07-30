@@ -16,6 +16,7 @@ function mahou() {
 	this.mE.move(1000,500,-this.dist,0);
 	const tt = 300;
 	this.eH.vibrate(tt);
+	const myself = this;
 	const fuga = setTimeout(()=>{
 		myself.audioI.currentTime = 0;
 		myself.audioI.play();
