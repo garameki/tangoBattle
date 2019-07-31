@@ -55,14 +55,16 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 		this.thresholdScore = 1;/*全部がこのスコア以上になったらクリア*/
 
 		/*敵の表示*/
-		const nn = Math.round(Math.random()*(this.aE.length)-0.5);
-		this.monster = this.aE[nn];
-//		this.eE.appearElement(this.aE[nn],0,Image.MIDDLE,100);
+		const nnE = Math.round(Math.random()*(this.aE.length)-0.5);
+		this.monster = this.aE[nnE];
 		this.eE.appearElement(this.monster.fname,0,Image.MIDDLE,100);
 		this.mE.appearElement(0,Canv.MIDDLE,100);
 
 		/*主人公の表示*/
-		this.eH.appearElement(this.aH[0],0,Image.MIDDLE,-100);
+		const nnH = Math.round(Math.random()*(this.aH.length)-0.5);
+		this.hero = this.aH[nnH];
+		this.eH.appearElement(this.hero.fname,0,Image.MIDDLE,-100);
+		this.mH.appearElement(0,Canv.MIDDLE,100);
 
 	}
 
@@ -119,8 +121,10 @@ Battle.prototype.correct = function() {
 
 		this.eE.vibrate(0);
 		/*敵との距離*/
-		const dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;
-		this.eH.goback(-dist,0,0.1);
+		//const dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;
+		this.dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;/*call内で使う*/
+//		this.eH.goback(-dist,0,0.1);
+		this.hero.attack(this);
 		if(flag) {
 			/*セクションのすべての単語をマスター*/
 			/*一匹やっつけた*/
