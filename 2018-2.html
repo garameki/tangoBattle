@@ -27,12 +27,32 @@ const htmlLinkNext = "2018-1";
  ** Battle用コンテンツ
  *********************************************************************/
 /*各シーンのヒーローの画像*/
-const hero1 = 'images/senshi.png';
-const hero2 = 'images/senshiKobito.png';
-const desh = 'images/desh.png';
-const sarahime = 'images/sarahime.png';
 const chokobo = 'images/chokobo.png';
-
+const tamanegi1 = new Monster('images/tamanegi1.png',[rmahou],[1]);
+const tamanegi2 = new Monster('images/tamanegi2.png',[rmahou],[1]);
+const tamanegi3 = new Monster('images/tamanegi3.png',[rmahou],[1]);
+const aHeroSaidan = [
+	tamanegi1,
+	tamanegi2,
+	tamanegi3
+];
+const sido = new Monster('images/sido.png',[rmahou],[1]);
+const sarahime = new Monster('images/sarahime.png',[rmahou],[1]);
+const aHeroKanan = [
+	tamanegi1,
+	sido,
+	sarahime
+];
+const kobito = new Monster('images/senshiKobito.png',[rmahou],[1]);
+const aHeroTozasu = [
+	kobito
+];
+const desh = new Monster('images/desh.png',[rmahou],[1]);
+const aHeroNept = [
+	tamanegi1,
+	sarahime,
+	desh
+];
 /* SOUNDの読み込み */
 const aSword = new Audio();
 aSword.src = '../eikaiwa/oto/sword.mp3';/*正解の音*/
@@ -46,6 +66,13 @@ const aDamageHime = new Audio();
 aDamageHime.src = '../eikaiwa/oto/abunai.mp3';
 const aDamageChokobo = new Audio();
 aDamageChokobo.src = '../eikaiwa/oto/kaa.mp3';
+
+aGong1.volume = 0;
+aGong2.volume = 0;
+aDamage.volume = 0;
+aSword.volume = 0;
+aDamageHime.volume = 0;
+aDamageChokobo.volume = 0;
 
 /*各シーンのサウンドの設定*/
 const oSound1 = {
@@ -69,9 +96,13 @@ const oSoundHime = {
 };
 
 /*各シーンの背景*/
-const bg1 = 'images/bgTaki.png';
-const bg2 = 'images/bgTaki.png';
 const bgSaidan = 'images/bgSaidan.png';
+const bgKasuzu = 'images/bgKasuzu.png';
+const bgSasun = 'images/bgSasun.png';
+const bgFuuin = 'images/bgFuuin.png';
+const bgBahamuto = 'images/bgBahamuto.png';
+const bgTozasu = 'images/bgTozasu.png';
+const bgNept = 'images/bgNept.png';
 
 /*for QUESTION*/
 const q1 = [
@@ -302,8 +333,8 @@ const q25 = [
 ,["relate to A","Aに関係する"]
 ,["fear [/fiə/","恐れ"]
 ,["active","活発な(act[動詞]の形容詞形)"]
-,["feel felt felt","feelの活用"]
-,["keep kept kept","keepの活用"]
+,["feelの活用","feel felt felt"]
+,["keepの活用","keep kept kept"]
 ,["feel","感じる"]
 ,["pain","痛み"]
 ,["drop","下がる"]
@@ -480,10 +511,10 @@ const aEnemyBahamutoBoss2 = [
 ];
 /*トーザスの抜け道*/
 const dakufeisu =	new Monster('images/tozasuDakufeisu.png',[taiatari],[1]);
-const repraho =		new Monster('images/tozasuRepraho.png',[taiatari],[1]);
+const repurahon =	new Monster('images/tozasuRepurahon.png',[taiatari],[1]);
 const aEnemyTozasu = [
 	dakufeisu,
-	repraho
+	repurahon
 ];
 /*ネプト神殿*/
 const puti =		new Monster('images/neptPuti.png',[taiatari],[1]);
@@ -543,45 +574,48 @@ onload = function() {
 		mahouHero:document.getElementById('mahouH')
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
+	/*
 	//祭壇の洞窟
-	battles.store('(1)','201821',q1,oSound1,aEnemySaidan1,hero1,bgSaidan);
-	battles.store('(2)','201822',q2,oSound2,aEnemySaidan1,hero1,bgSaidan);
-	battles.store('(21)','201822',q21,oSound2,aEnemySaidanBoss,hero1,bgSaidan);
-	battles.store('(3)','201822',q3,oSound2,aEnemySaidan2,hero1,bgSaidan);
-	battles.store('(4)','201822',q4,oSound2,aEnemySaidan2,hero1,bgSaidan);
-	battles.store('(5)','201822',q5,oSound2,aEnemySaidan1,hero1,bgSaidan);
-	battles.store('(6)','201822',q6,oSound2,aEnemySaidan1,hero1,bgSaidan);
+	battles.store('(1)','201821',q1,oSound1,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(2)','201822',q2,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(21)','201822',q21,oSound2,aEnemySaidanBoss,aHeroSaidan,bgSaidan);
+	battles.store('(3)','201822',q3,oSound2,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(4)','201822',q4,oSound2,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(5)','201822',q5,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(6)','201822',q6,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
 	//カスズ
-	battles.store('(7)','201822',q7,oSound2,aEnemyKasuzu,hero1,bg2);
-	battles.store('(8)','201822',q8,oSound2,aEnemyKasuzu,hero1,bg2);
+	battles.store('(7)','201822',q7,oSound2,aEnemyKasuzu,aHeroKanan,bgKasuzu);
+	battles.store('(8)','201822',q8,oSound2,aEnemyKasuzu,aHeroKanan,bgKasuzu);
 	//サスーン城
-	battles.store('(9)','201822',q9,oSound2,aEnemySasun,hero1,bg2);
-	battles.store('(10)','201822',q10,oSound2,aEnemySasun,hero1,bg2);
-	battles.store('(22)','201822',q22,oSound2,aEnemySasunBoss,hero1,bg2);
+	battles.store('(9)','201822',q9,oSound2,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(10)','201822',q10,oSound2,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(22)','201822',q22,oSound2,aEnemySasunBoss,aHeroSaidan,bgSasun);
 	//封印の洞窟
-	battles.store('(11)','201822',q11,oSound2,aEnemyFuuin1,hero1,bg2);
-	battles.store('(12)','201822',q12,oSound2,aEnemyFuuin1,hero1,bg2);
-	battles.store('(13)','201822',q13,oSound2,aEnemyFuuin2,hero1,bg2);
-	battles.store('(14)','201822',q14,oSound2,aEnemyFuuin2,hero1,bg2);
-	battles.store('(23)','201822',q23,oSoundHime,aEnemyFuuinBoss,sarahime,bg2);
+	battles.store('(11)','201822',q11,oSound2,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(12)','201822',q12,oSound2,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(13)','201822',q13,oSound2,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(14)','201822',q14,oSound2,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(23)','201822',q23,oSoundHime,aEnemyFuuinBoss,sarahime,bgFuuin);
 	//サスーン カヌー
-	battles.store('(15)','201822',q15,oSound2,aEnemySasun,hero1,bg2);
-	battles.store('(16)','201822',q16,oSound2,aEnemySasun,hero1,bg2);
+	battles.store('(15)','201822',q15,oSound2,aEnemySasun,aHeroSaidan,bgKasuzu);
+	battles.store('(16)','201822',q16,oSound2,aEnemySasun,aHeroSaidan,bgKasuzu);
 	//バハムート
-	battles.store('(17)','201822',q17,oSound2,aEnemyBahamuto,hero1,bg2);
-	battles.store('(18)','201822',q18,oSound2,aEnemyBahamuto,hero1,bg2);
-	battles.store('(24)','201822',q24,oSound2,aEnemyBahamutoBoss1,hero1,bg2);
-	battles.store('(25)','201822',q25,oSound2,aEnemyBahamutoBoss2,hero1,bg2);
+	battles.store('(17)','201822',q17,oSound2,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(18)','201822',q18,oSound2,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(24)','201822',q24,oSound2,aEnemyBahamutoBoss1,aHeroSaidan,bgBahamuto);
+	battles.store('(25)','201822',q25,oSound2,aEnemyBahamutoBoss2,aHeroSaidan,bgBahamuto);
+	*/
 	//トーザスの抜け道
-	battles.store('(19)','201822',q19,oSound2,aEnemyTozasu,hero1,bg2);
-	battles.store('(20)','201822',q20,oSound2,aEnemyTozasu,hero1,bg2);
-	battles.store('(26-1)','201822',q26_1,oSound2,aEnemyBahamutoBoss2,hero1,bg2);
+	battles.store('(19)','201822',q19,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(20)','201822',q20,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(26-1)','201822',q26_1,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
 	//ネプト神殿
-	battles.store('(26-2)','201822',q26_2,oSound2,aEnemyNept,hero2,bg2);
-	battles.store('(26-3)','201822',q26_3,oSound2,aEnemyNept,hero2,bg2);
-	battles.store('(26-4)','201822',q26_4,oSound2,aEnemyNeptBoss,desh,bg2);
+	battles.store('(26-2)','201822',q26_2,oSound2,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-3)','201822',q26_3,oSound2,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-4)','201822',q26_4,oSound2,aEnemyNeptBoss,desh,bgNept);
 	
 	battles.start();
+
 };
 
 
