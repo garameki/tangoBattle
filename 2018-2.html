@@ -26,33 +26,6 @@ const htmlLinkNext = "2018-1";
 /*********************************************************************
  ** Battle用コンテンツ
  *********************************************************************/
-/*各シーンのヒーローの画像*/
-const chokobo = 'images/chokobo.png';
-const tamanegi1 = new Monster('images/tamanegi1.png',[rmahou],[1]);
-const tamanegi2 = new Monster('images/tamanegi2.png',[rmahou],[1]);
-const tamanegi3 = new Monster('images/tamanegi3.png',[rmahou],[1]);
-const aHeroSaidan = [
-	tamanegi1,
-	tamanegi2,
-	tamanegi3
-];
-const sido = new Monster('images/sido.png',[rmahou],[1]);
-const sarahime = new Monster('images/sarahime.png',[rmahou],[1]);
-const aHeroKanan = [
-	tamanegi1,
-	sido,
-	sarahime
-];
-const kobito = new Monster('images/senshiKobito.png',[rmahou],[1]);
-const aHeroTozasu = [
-	kobito
-];
-const desh = new Monster('images/desh.png',[rmahou],[1]);
-const aHeroNept = [
-	tamanegi1,
-	sarahime,
-	desh
-];
 /* SOUNDの読み込み */
 const aSword = new Audio();
 aSword.src = '../eikaiwa/oto/sword.mp3';/*正解の音*/
@@ -66,34 +39,85 @@ const aDamageHime = new Audio();
 aDamageHime.src = '../eikaiwa/oto/abunai.mp3';
 const aDamageChokobo = new Audio();
 aDamageChokobo.src = '../eikaiwa/oto/kaa.mp3';
+const aDamageZonbie = new Audio();
+aDamageZonbie.src = 'oto/zonbie.mp3';
+aDamageZonbie.playbackRate = 2;
 
-aGong1.volume = 0;
-aGong2.volume = 0;
-aDamage.volume = 0;
-aSword.volume = 0;
-aDamageHime.volume = 0;
-aDamageChokobo.volume = 0;
+aGong1.volume = 0.2;
+aGong2.volume = 0.2;
+aDamage.volume = 0.5;
+aSword.volume = 0.2;
+aDamageHime.volume = 1;
+aDamageChokobo.volume = 1;
 
 /*各シーンのサウンドの設定*/
-const oSound1 = {
-	correct:aSword,
-	incorrect:aDamage,
+const oSound = {
 	start:aGong1,
 	end:aGong2
 };
 
-const oSound2 = {
-	correct:aSword,
-	incorrect:aDamage,
-	start:aGong1,
-	end:aGong2
+/*キャラの声*/
+const oVoice = {
+	scream:aDamage
 };
-const oSoundHime = {
-	correct:aSword,
-	incorrect:aDamageHime,
-	start:aGong1,
-	end:aGong2
+const oVoiceHime = {
+	scream:aDamageHime
 };
+const oVoiceZonbie = {
+	scream:aDamageZonbie
+};
+
+
+/*各シーンのヒーローの画像*/
+const tamanegi1 = new Monster('images/heroTamanegi1.png',[rtaiatari],[1],oVoice);
+const tamanegi2 = new Monster('images/heroTamanegi2.png',[rtaiatari],[1],oVoice);
+const tamanegi3 = new Monster('images/heroTamanegi3.png',[rtaiatari],[1],oVoice);
+const aHeroSaidan = [
+	tamanegi1,
+	tamanegi2,
+	tamanegi3
+];
+const senshi1 = 	new Monster('images/heroSenshi1.png',[rtaiatari],[1],oVoice);
+const monk = 		new Monster('images/heroMonk.png',[rtaiatari],[1],oVoice);
+const shiro = 		new Monster('images/heroShiromadoushi.png',[rmahou],[1],oVoice);
+const kuro = 		new Monster('images/heroKuromadoushi.png',[rmahou],[1],oVoice);
+const sido = 		new Monster('images/heroSido.png',[rmahou],[1],oVoice);
+const sarahime = 	new Monster('images/heroSarahime.png',[rmahou],[1],oVoiceHime);
+const aHeroKanan = [
+	senshi1,
+	monk,
+	tamanegi1,
+	sido,
+	sarahime,
+	shiro,
+	kuro
+];
+const kobito = new Monster('images/heroKobito.png',[rmahou],[1],oVoice);
+const aHeroTozasu = [
+	kobito
+];
+const desh = new Monster('images/heroDesh.png',[rmahou],[1],oVoice);
+const aHeroNept = [
+	tamanegi1,
+	desh
+];
+const aHeroUmiFuyuu = [
+	tamanegi1,
+	desh
+];
+const chokobo = new Monster('images/heroChokobo.png',[rmahou],[1],oVoice);
+const aHeroGurugan = [
+	tamanegi1,
+	desh,
+	chokobo
+];
+const aHeroOen = [
+	senshi1,
+	monk,
+	shiro,
+	kuro
+];
+	
 
 /*各シーンの背景*/
 const bgSaidan = 'images/bgSaidan.png';
@@ -103,6 +127,9 @@ const bgFuuin = 'images/bgFuuin.png';
 const bgBahamuto = 'images/bgBahamuto.png';
 const bgTozasu = 'images/bgTozasu.png';
 const bgNept = 'images/bgNept.png';
+const bgUmiFuyuu = 'images/bgUmiFuyuu.png';
+const bgGurugan = 'images/bgGurugan.png';
+const bgOen = 'images/bgOen.png';
 
 /*for QUESTION*/
 const q1 = [
@@ -250,7 +277,7 @@ const q20 = [
 ,["inform A of B","AにBについて知らせる",""]
 ];
 const q21 = [
-["although","～にもかかわらず"]
+["although","～だが"]
 ,["varieties of banana","バナナの種類"]
 ,["type","型"]
 ,["however","しかし"]
@@ -354,8 +381,8 @@ const q26_1 = [
 ,["cause A","Aを引き起こす"]
 ];
 const q26_2 = [
-["decrease[/díːkriːs/]","減らす"]
-,["increase[/íŋkriːs/]","増やす","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=5FI_XdypGdTomAWR7qHgCQ&q=increase+meaning&oq=increase+meaning&gs_l=psy-ab.3..0i7i30l6j0i203j0i7i30.63716.65434..65732...0.0..0.149.1022.0j8......0....1..gws-wiz.......0i7i4i30j0i67j0i4j0j0i13j0i7i30i19j0i19.jeAcAFw031A&ved=0ahUKEwjcq9f099rjAhVUNKYKHRF3CJwQ4dUDCAo&uact=5"]
+["decrease[/díːkriːs/]","減少"]
+,["increase[/íŋkriːs/]","増加","https://www.google.com/search?rlz=1C1CHBD_jaJP787JP787&ei=5FI_XdypGdTomAWR7qHgCQ&q=increase+meaning&oq=increase+meaning&gs_l=psy-ab.3..0i7i30l6j0i203j0i7i30.63716.65434..65732...0.0..0.149.1022.0j8......0....1..gws-wiz.......0i7i4i30j0i67j0i4j0j0i13j0i7i30i19j0i19.jeAcAFw031A&ved=0ahUKEwjcq9f099rjAhVUNKYKHRF3CJwQ4dUDCAo&uact=5"]
 ,["certain A","あるA"]
 ,["cytokine[sʌ́ɪtəkʌɪn]","(脳内物質の一種)サイトカイン"]
 ,["reason","理由"]
@@ -363,7 +390,7 @@ const q26_2 = [
 ];
 const q26_3 = [
 ["even so + 節","...といえども、(＝nevertheless ..., =in spite of ...)"]
-,["bad worse worst","badの活用"]
+,["badの活用","bad worse worst"]
 ,["to make matters worse","さらに悪いことに、"]
 ,["particularly","特に"]
 ,["helpful","役に立つ"]
@@ -380,40 +407,95 @@ const q26_4 = [
 ,["mental","精神の(⇔physical)"]
 ,["physical","体の(⇔mental)、物質の、物理の"]
 ];
-const q27 = [
-["",""]
-,["",""]
-,["",""]
+
+
+const q272829_1 = [
+["raise money","募金する"]
+,["a number of A","多くのA、数々のA"]
+,["hockey","ホッケー(スポーツ)"]
+,["equipment[/ɪkwípm(ə)nt/]","備品,装備"]
+,["membership","会員であること"]
+,["pay","(お金を)払う"]
 ];
-const q28 = [
-["",""]
-,["",""]
-,["",""]
+const q272829_2 = [
+["currently","現在、現在は、いまのところ"]
+,["look for A","Aを探す"]
+,["practice","練習"]
+,["sign-up sheet","登録シート、エントリーシート、参加シート"]
+,["hold A","Aを催す、Aを執り行う"]
+,["put out an advertisement","広告を出す"]
 ];
-const q29 = [
-["",""]
-,["",""]
-,["",""]
+const q272829_3 = [
+["put out the light","灯りを消す"]
+,["advertisement","広告"]
+,["agree to -ing","～することに賛成する"]
+,["discounte","(値段などを)割引する"]
+,["payment","支払い(payの名詞形)"]
+,["receive A","Aを受け取る"]
+];
+const q272829_4 = [
+["fill out A","Aを書いて埋める"]
+,["bringの活用","bring brought brought"]
+,["ask A to (do)","Aに～させる"]
+,["deadline","期限、締め切り"]
+,["Sincerely,","(手紙の結びに使い)心から"]
+,["expense","費用"]
+];
+const q272829_5 = [
+["advertise A","Aを広告する、Aをコマーシャルする"]
+,["allow A to (do)","Aが～するのを許す"]
+,["donate A","Aを寄付する,Aを<ruby>贈与<rt>ぞうよ</rt></ruby>する"]
+,["attend A","Aに参加する"]
 ];
 const q30 = [
-["",""]
-,["",""]
-,["",""]
+["allow A to (do)","Aが～するのを許す"]
+,["device [/-s/]","1.装置、2.工夫"]
+,["devise [/-z/]","Aを発明する、Aを工夫する"]
+,["disabled","形 身体障碍者の、体の不自由な"]
+,["freely","自由に"]
+,["Swedish","スウェーデンの"]
+,["come up with A","(「Aを持って上まで来る」から) Aを提示する、Aを持ち出してくる、Aに追いつく"]
 ];
 const q31 = [
-["",""]
-,["",""]
-,["",""]
+["movement","動き (ある動詞の名詞形)"]
+,["fix A","Aを固定する"]
+,["stare at A","Aをじっと見る"]
+,["lead to A","結果としてA(という状態)になる"]
+,["develop A","Aを発展させる"]
+,["involve (doing)","(必然的に、当然の結果として)～することになる"]
+,["intend to (do)","～するつもりである"]
+,["tend to (do)","～する傾向がある"]
+,["accident","偶然"]
 ];
 const q32 = [
-["",""]
-,["",""]
-,["",""]
+["although + 節","～だが"]
+,["attractive","魅力的な、人を惹きつける"]
+,["in particular","特に、とりわけ(=particularly)"]
+,["extremely","すこぶる、とても"]
+,["traditional","伝統的な"]
+,["at the same time","同時に"]
+,["find it difficult to (do)","～することは難しいとわかる"]
 ];
 const q33 = [
-["",""]
-,["",""]
-,["",""]
+["at present","現在は"]
+,["main","主な、主要な"]
+,["cheap","(価格などが)安い"]
+,["meanwhile","そうしている間に (in the meantime)"]
+,["relatives","親類、親戚"]
+,["relative","比較上の、相対的な"]
+,["Not only does + 節, but + 節","～するだけでなく～もする。"]
+,["contact A","Aと連絡を取る"]
+,["employment [/-oi-/]","雇用"]
+,["opportunity [/-tju-/]","機会"]
+,["sense","意味"]
+,["in this sense","この意味において"]
+,["technology","技術"]
+,["development","発展"]
+,["lead A","Aを先導する"]
+,["advantage [/-van-/]","有利な点、長所"]
+,["purpose","目的"]
+,["dangerous","危険な"]
+,["site","(ネット上の)サイト、場所"]
 ];
 const q34 = [
 ["",""]
@@ -441,12 +523,12 @@ const q38 = [
 ,["",""]
 ];
 
-const people = 		new Monster('images/fuuinPeople1.png',[mahou,taiatari],[0.1,0.9]);
+const people = 		new Monster('images/fuuinPeople1.png',[mahou,taiatari],[0.1,0.9],oVoiceZonbie);
 /*祭壇の洞窟*/
-const goblin = 		new Monster('images/saidanGoblin.png',[taiatari],[1]);
-const eyefang = 	new Monster('images/saidanEyefang.png',[taiatari],[1]);
-const kabancle = 	new Monster('images/saidanKabancle.png',[taiatari],[1]);
-const landturtle = 	new Monster('images/saidanLandturtle.png',[taiatari],[1]);
+const goblin = 		new Monster('images/saidanGoblin.png',[taiatari],[1],oVoiceZonbie);
+const eyefang = 	new Monster('images/saidanEyefang.png',[taiatari],[1],oVoiceZonbie);
+const kabancle = 	new Monster('images/saidanKabancle.png',[taiatari],[1],oVoiceZonbie);
+const landturtle = 	new Monster('images/saidanLandturtle.png',[taiatari],[1],oVoiceZonbie);
 const aEnemySaidan1 = [
 	goblin
 ];
@@ -458,29 +540,29 @@ const aEnemySaidanBoss = [
 	landturtle
 ];
 /*カズズの村*/
-const kirabi =		new Monster('images/kasuzuKirabi.png',[taiatari],[1]);
-const weaurufu =	new Monster('images/kasuzuWeaurufu.png',[taiatari],[1]);
+const kirabi =		new Monster('images/kasuzuKirabi.png',[taiatari],[1],oVoiceZonbie);
+const weaurufu =	new Monster('images/kasuzuWeaurufu.png',[taiatari],[1],oVoiceZonbie);
 const aEnemyKasuzu = [
 	kirabi,
 	weaurufu
 ];
 /*サスーン城*/
-const zonbi =	new Monster('images/sasunZonbi.png',[taiatari],[1]);
-const darkeye =	new Monster('images/sasunDarkeye.png',[taiatari],[1]);
-const grifon =	new Monster('images/sasunGrifon.png',[taiatari],[1]);
+const zonbi =	new Monster('images/sasunZonbi.png',[taiatari],[1],oVoiceZonbie);
+const darkeye =	new Monster('images/sasunDarkeye.png',[taiatari],[1],oVoiceZonbie);
 const aEnemySasun = [
 	zonbi,
 	darkeye
 ];
+const grifon = new Monster('images/sasunGrifon.png',[taiatari],[1],oVoiceZonbie);
 const aEnemySasunBoss = [
 	grifon
 ];
 /*封印の洞窟*/
-const mami =		new Monster('images/fuuinMami.png',[taiatari],[1]);
-const sukeruton =	new Monster('images/fuuinSukeruton.png',[taiatari],[1]);
-const raruwai =		new Monster('images/fuuinRaruwai.png',[taiatari],[1]);
-const noroinodouka =	new Monster('images/fuuinNoroinodouka.png',[taiatari],[1]);
-const jin =		new Monster('images/fuuinJin.png',[taiatari,mahou],[0.5,0.5]);
+const mami =		new Monster('images/fuuinMami.png',[taiatari],[1],oVoiceZonbie);
+const sukeruton =	new Monster('images/fuuinSukeruton.png',[taiatari],[1],oVoiceZonbie);
+const raruwai =		new Monster('images/fuuinRaruwai.png',[taiatari],[1],oVoiceZonbie);
+const noroinodouka =	new Monster('images/fuuinNoroinodouka.png',[taiatari],[1],oVoiceZonbie);
+const jin =		new Monster('images/fuuinJin.png',[taiatari,mahou],[0.5,0.5],oVoiceZonbie);
 const aEnemyFuuin1 = [
 	sukeruton,
 	mami
@@ -494,10 +576,10 @@ const aEnemyFuuinBoss = [
 	jin
 ];
 /*バハムートの巣*/
-const tori = 		new Monster('images/bahamutoTori.png',[taiatari],[1]);
-const rufu = 		new Monster('images/bahamutoRufu.png',[mahou],[1]);
-const bahamuto = 	new Monster('images/bahamuto.png',[mahou],[1]);
-const bahamuto2 = 	new Monster('images/bahamuto2.png',[mahou],[1]);
+const tori = 		new Monster('images/bahamutoTori.png',[taiatari],[1],oVoiceZonbie);
+const rufu = 		new Monster('images/bahamutoRufu.png',[mahou],[1],oVoiceZonbie);
+const bahamuto = 	new Monster('images/bahamuto.png',[mahou],[1],oVoiceZonbie);
+const bahamuto2 = 	new Monster('images/bahamuto2.png',[mahou],[1],oVoiceZonbie);
 const aEnemyBahamuto = [
 	tori,
 	rufu,
@@ -510,18 +592,18 @@ const aEnemyBahamutoBoss2 = [
 	bahamuto2
 ];
 /*トーザスの抜け道*/
-const dakufeisu =	new Monster('images/tozasuDakufeisu.png',[taiatari],[1]);
-const repurahon =	new Monster('images/tozasuRepurahon.png',[taiatari],[1]);
+const dakufeisu =	new Monster('images/tozasuDakufeisu.png',[taiatari],[1],oVoiceZonbie);
+const repurahon =	new Monster('images/tozasuRepurahon.png',[taiatari],[1],oVoiceZonbie);
 const aEnemyTozasu = [
 	dakufeisu,
 	repurahon
 ];
 /*ネプト神殿*/
-const puti =		new Monster('images/neptPuti.png',[taiatari],[1]);
-const bloodworm =	new Monster('images/neptBloodworm.png',[taiatari],[1]);
-const riripatto =	new Monster('images/neptRiripatto.png',[taiatari],[1]);
-const wearatto =	new Monster('images/neptWearatto.png',[taiatari],[1]);
-const oonezumi = 	new Monster('images/neptOonezumi.png',[taiatari],[1]);
+const puti =		new Monster('images/neptPuti.png',[taiatari],[1],oVoiceZonbie);
+const bloodworm =	new Monster('images/neptBloodworm.png',[taiatari],[1],oVoiceZonbie);
+const riripatto =	new Monster('images/neptRiripatto.png',[taiatari],[1],oVoiceZonbie);
+const wearatto =	new Monster('images/neptWearatto.png',[taiatari],[1],oVoiceZonbie);
+const oonezumi = 	new Monster('images/neptOonezumi.png',[taiatari],[1],oVoiceZonbie);
 const aEnemyNept = [
 	bloodworm,
 	puti,
@@ -532,15 +614,33 @@ const aEnemyNeptBoss = [
 	oonezumi
 ];
 /*浮遊大陸の海*/
-const sahagin = new Monster('images/umiSahagin.png',[taiatari],[1]);
-const kirafish = new Monster('images/umiKirafish.png',[taiatari],[1]);
-const sierementaru = new Monster('images/umiSierementaru.png',[taiatari],[1]);
+const sahagin = new Monster('images/umiSahagin.png',[taiatari],[1],oVoiceZonbie);
+const kirafish = new Monster('images/umiKirafish.png',[taiatari],[1],oVoiceZonbie);
+const sierementaru = new Monster('images/umiSierementaru.png',[taiatari],[1],oVoiceZonbie);
 const aEnemyUmiFuyuu = [
 	sahagin,
 	kirafish,
 	sierementaru
 ];
-
+/*グルガン族付近*/
+const aEnemyGurugan = [
+	grifon
+];
+/*オーエンの塔*/
+const bloodbad = new Monster('images/oenBloodbad.png',[taiatari],[1],oVoiceZonbie);
+const ohishuki = new Monster('images/oenOhishuki.png',[taiatari],[1],oVoiceZonbie);
+const putimeiji = new Monster('images/oenPutimeiji.png',[taiatari],[1],oVoiceZonbie);
+const fajarugu = new Monster('images/oenFajarugu.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyOen = [
+	bloodbad,
+	ohishuki,
+	putimeiji,
+	fajarugu
+];
+const medhusa = new Monster('images/oenMedhusa.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyOenBoss = [
+	medhusa
+];
 
 let battles;/*onclickの中で使う*/
 onload = function() {
@@ -576,44 +676,57 @@ onload = function() {
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
 	/*
 	//祭壇の洞窟
-	battles.store('(1)','201821',q1,oSound1,aEnemySaidan1,aHeroSaidan,bgSaidan);
-	battles.store('(2)','201822',q2,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
-	battles.store('(21)','201822',q21,oSound2,aEnemySaidanBoss,aHeroSaidan,bgSaidan);
-	battles.store('(3)','201822',q3,oSound2,aEnemySaidan2,aHeroSaidan,bgSaidan);
-	battles.store('(4)','201822',q4,oSound2,aEnemySaidan2,aHeroSaidan,bgSaidan);
-	battles.store('(5)','201822',q5,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
-	battles.store('(6)','201822',q6,oSound2,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(1)','201821',q1,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(2)','201822',q2,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(21)','201822',q21,oSound,aEnemySaidanBoss,aHeroSaidan,bgSaidan);
+	battles.store('(3)','201822',q3,oSound,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(4)','201822',q4,oSound,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(5)','201822',q5,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(6)','201822',q6,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
 	//カスズ
-	battles.store('(7)','201822',q7,oSound2,aEnemyKasuzu,aHeroKanan,bgKasuzu);
-	battles.store('(8)','201822',q8,oSound2,aEnemyKasuzu,aHeroKanan,bgKasuzu);
+	battles.store('(7)','201822',q7,oSound,aEnemyKasuzu,aHeroKanan,bgKasuzu);
+	battles.store('(8)','201822',q8,oSound,aEnemyKasuzu,aHeroKanan,bgKasuzu);
 	//サスーン城
-	battles.store('(9)','201822',q9,oSound2,aEnemySasun,aHeroSaidan,bgSasun);
-	battles.store('(10)','201822',q10,oSound2,aEnemySasun,aHeroSaidan,bgSasun);
-	battles.store('(22)','201822',q22,oSound2,aEnemySasunBoss,aHeroSaidan,bgSasun);
+	battles.store('(9)','201822',q9,oSound,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(10)','201822',q10,oSound,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(22)','201822',q22,oSound,aEnemySasunBoss,aHeroSaidan,bgSasun);
 	//封印の洞窟
-	battles.store('(11)','201822',q11,oSound2,aEnemyFuuin1,aHeroSaidan,bgFuuin);
-	battles.store('(12)','201822',q12,oSound2,aEnemyFuuin1,aHeroSaidan,bgFuuin);
-	battles.store('(13)','201822',q13,oSound2,aEnemyFuuin2,aHeroSaidan,bgFuuin);
-	battles.store('(14)','201822',q14,oSound2,aEnemyFuuin2,aHeroSaidan,bgFuuin);
-	battles.store('(23)','201822',q23,oSoundHime,aEnemyFuuinBoss,sarahime,bgFuuin);
+	battles.store('(11)','201822',q11,oSound,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(12)','201822',q12,oSound,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(13)','201822',q13,oSound,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(14)','201822',q14,oSound,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(23)','201822',q23,oSound,aEnemyFuuinBoss,sarahime,bgFuuin);
 	//サスーン カヌー
-	battles.store('(15)','201822',q15,oSound2,aEnemySasun,aHeroSaidan,bgKasuzu);
-	battles.store('(16)','201822',q16,oSound2,aEnemySasun,aHeroSaidan,bgKasuzu);
+	battles.store('(15)','201822',q15,oSound,aEnemySasun,aHeroSaidan,bgKasuzu);
+	battles.store('(16)','201822',q16,oSound,aEnemySasun,aHeroSaidan,bgKasuzu);
 	//バハムート
-	battles.store('(17)','201822',q17,oSound2,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
-	battles.store('(18)','201822',q18,oSound2,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
-	battles.store('(24)','201822',q24,oSound2,aEnemyBahamutoBoss1,aHeroSaidan,bgBahamuto);
-	battles.store('(25)','201822',q25,oSound2,aEnemyBahamutoBoss2,aHeroSaidan,bgBahamuto);
-	*/
+	battles.store('(17)','201822',q17,oSound,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(18)','201822',q18,oSound,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(24)','201822',q24,oSound,aEnemyBahamutoBoss1,aHeroSaidan,bgBahamuto);
+	battles.store('(25)','201822',q25,oSound,aEnemyBahamutoBoss2,aHeroSaidan,bgBahamuto);
 	//トーザスの抜け道
-	battles.store('(19)','201822',q19,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
-	battles.store('(20)','201822',q20,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
-	battles.store('(26-1)','201822',q26_1,oSound2,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(19)','201822',q19,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(20)','201822',q20,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(26-1)','201822',q26_1,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
 	//ネプト神殿
-	battles.store('(26-2)','201822',q26_2,oSound2,aEnemyNept,aHeroNept,bgNept);
-	battles.store('(26-3)','201822',q26_3,oSound2,aEnemyNept,aHeroNept,bgNept);
-	battles.store('(26-4)','201822',q26_4,oSound2,aEnemyNeptBoss,desh,bgNept);
-	
+	battles.store('(26-2)','201822',q26_2,oSound,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-3)','201822',q26_3,oSound,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-last)','201822',q26_4,oSound,aEnemyNeptBoss,aHeroNept,bgNept);
+	//グルガン族まで
+	battles.store('(26,27,28 -1)','201822',q272829_1,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -2)','201822',q272829_2,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -3)','201822',q272829_3,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -4)','201822',q272829_4,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
+	battles.store('(26,27,28 -last)','201822',q272829_5,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
+	*/
+	//オーエンの塔
+	battles.store('(30)','201822',q30,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(31)','201822',q31,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(32)','201822',q32,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(33)','201822',q33,oSound,aEnemyOenBoss,aHeroOen,bgOen);
+
+
+
 	battles.start();
 
 };
@@ -628,7 +741,7 @@ onload = function() {
 				<img id="enemy">
 				<canvas id="mahouE" src="images/senshi.png" style="display:inline;"></canvas>
 				<img id="hero" >
-				<canvas id="mahouH" src="images/senshi.png" style="display:inline;"></canvas>
+				<canvas id="mahouH" width=500 height=500  style="display:inline;"></canvas>
 			<div class="clearFloat"></div>
 		</div>
 
