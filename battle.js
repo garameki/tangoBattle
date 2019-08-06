@@ -8,8 +8,6 @@ const Battle = function(sVariable,contents,oElement,oSound,sDate,aEnemy,aHero,sB
 	}
 	if(contents.length > 0) {
 		/*音*/
-		this.audioC = oSound.correct;
-		this.audioI = oSound.incorrect;
 		this.audioS = oSound.start;
 		this.audioE = oSound.end;
 		this.sD = sDate;
@@ -99,10 +97,6 @@ Battle.prototype.correct = function() {
 		/* ボタンとリストを消す */
 		document.getElementById('forVisible').style.visibility = 'hidden';
 		this.eL.innerHTML = '';
-		this.audioI.pause();
-		this.audioC.pause();
-		this.audioC.currentTime = 0;
-		this.audioC.play();
 		let date = new Date();
 		date.setFullYear(date.getFullYear()+1);
 		let num = this._search(this.nNode);
@@ -119,42 +113,46 @@ Battle.prototype.correct = function() {
 			}
 		}
 
-		this.eE.vibrate(0);
 		/*敵との距離*/
 		//const dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;
 		this.dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;/*call内で使う*/
 //		this.eH.goback(-dist,0,0.1);
-		this.hero.attack(this);
-		if(flag) {
-			/*セクションのすべての単語をマスター*/
-			/*一匹やっつけた*/
-			this.audioE.play();
-			this.eE.disappear(1.0);/*1秒で消える*/
-//			this.eE.appearElement('images/cleared.png',1.1,Image.MIDDLE,100);/*1.1秒後に出現*/
-			/*ジャンプ*/
-			const myself = this;
-			const hogeJump1 = setInterval(()=>{
-				clearInterval(hogeJump1);
-				myself.eH.goback(0,-100,0.1);
-			},1100);
-			const hogeJump2 = setInterval(()=>{
-				clearInterval(hogeJump2);
-				myself.eH.goback(0,-100,0.1);
-			},1350);
-			const hogeJump3 = setInterval(()=>{
-				clearInterval(hogeJump3);
-				myself.eH.goback(0,-100,0.1);
-			},1600);
-			
-			/*次の敵*/
-			const hogeNextEnemy = setInterval(()=>{
-				clearInterval(hogeNextEnemy);
-				battles.next();
-			},1600);
-		} else {
-			this._buttonRandom();
-			this._buttonList();
-		}
+		const tt = this.hero.attack(this);
+		console.log(tt);
+		setTimeout(()=>{
+			if(flag) {
+				/*セクションのすべての単語をマスター*/
+				/*一匹やっつけた*/
+				this.audioE.currentTime = 0;
+				this.audioE.play();
+				this.eE.disappear(1.0);/*1秒で消える*/
+	//			this.eE.appearElement('images/cleared.png',1.1,Image.MIDDLE,100);/*1.1秒後に出現*/
+				/*ジャンプ*/
+				const myself = this;
+				const hogeJump1 = setInterval(()=>{
+					clearInterval(hogeJump1);
+					myself.eH.goback(0,-100,0.1);
+				},1100);
+				const hogeJump2 = setInterval(()=>{
+					clearInterval(hogeJump2);
+					myself.eH.goback(0,-100,0.1);
+				},1350);
+				const hogeJump3 = setInterval(()=>{
+					clearInterval(hogeJump3);
+					myself.eH.goback(0,-100,0.1);
+				},1600);
+				
+				/*次の敵*/
+				const hogeNextEnemy = setInterval(()=>{
+					clearInterval(hogeNextEnemy);
+					battles.next();
+				},1600);
+			} else {
+				this._buttonRandom();
+				this._buttonList();
+			}
+			console.log('finished');
+		},500);
 
 
 	} else {
@@ -169,9 +167,7 @@ Battle.prototype.incorrect = function() {
 	const myself = this;
 	if(this.nNode != -1) {
 		this._buttonRandom();
-		this.audioI.pause();
-		this.audioC.pause();
-		/*敵の攻撃*/
+		/*敵との距離*/
 		this.dist = this.eE.parentNode.offsetWidth - 200 - this.eE.width - this.eH.width;/*call内で使う*/
 		this.monster.attack(this);
 		/*cookie処理*/

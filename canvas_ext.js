@@ -2,21 +2,26 @@ const Canv = function(element) {
 	this.element = element;
 	this.ctx = element.getContext('2d');
 };
-Canv.prototype.puwa = function(time) {
+Canv.prototype.puwa = function(sColor) {
 	const myself = this;
-	const maxRadius = 34;
-	this.element.style.opacity = '1.0';
-	if(time < maxRadius) time = maxRadius;
-	const diffTime = time / maxRadius;
-	this.ctx.fillStyle = 'magenta';
+	let radiusMax = 10000000;
+	if(radiusMax > this.ctx.canvas.offsetWidth/2) radiusMax = this.ctx.canvas.offsetWidth/2;
+	if(radiusMax > this.ctx.canvas.offsetHeight/2) radiusMax = this.ctx.canvas.offsetHeight/2;
+	this.element.style.opacity = '0.5';//????
+	this.ctx.fillStyle = sColor;
 	let radius = 0;
+	const dt = 10;
+	const dr = radiusMax / (500 / dt); 
 	const hogePuwa = setInterval(()=>{
-		radius++;
+		radius += dr;
 		myself.ctx.beginPath();
-		myself.ctx.arc(34,34,radius,0,2*Math.PI);
+		myself.ctx.arc(myself.ctx.canvas.offsetWidth/2,myself.ctx.canvas.offsetHeight/2,radius,0,2*Math.PI);
 		myself.ctx.fill();
-		if(radius > maxRadius) clearInterval(hogePuwa);
-	},diffTime);
+		if(radius > radiusMax) {
+			clearInterval(hogePuwa);
+			myself.ctx.clearRect(0,0,myself.ctx.canvas.offsetWidth,myself.ctx.canvas.offsetHeight);
+		}
+	},dt);
 };
 
 
@@ -130,7 +135,6 @@ Canv.prototype.move = function(diffTime,lenTime,xx,yy) {
 		const ddy = yy / div;
 		const beforeLeft = this.element.style.left;
 		const left = Number(beforeLeft.match(/\-*\d+(?:\.\d+)*/)[0]);
-		console.log('left=',left);
 		const ddx = xx / div;
 		const hogeMove = setInterval(()=>{
 			if(++count >= div) clearInterval(hogeMove);
@@ -139,7 +143,6 @@ Canv.prototype.move = function(diffTime,lenTime,xx,yy) {
 			myself.element.style.position = 'relative';
 			myself.element.style.top = sTop;
 			myself.element.style.left = sLeft;
-			console.log(count,sLeft);
 		},lenTime/div);
 	},diffTime);
 };
