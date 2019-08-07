@@ -28,17 +28,17 @@ const htmlLinkNext = "2018-1";
  *********************************************************************/
 /* SOUNDの読み込み */
 const aSword = new Audio();
-aSword.src = '../eikaiwa/oto/sword.mp3';/*正解の音*/
+aSword.src = 'oto/sword.mp3';/*正解の音*/
 const aDamage = new Audio();
-aDamage.src = '../eikaiwa/oto/damage.mp3';/*不正解音*/
+aDamage.src = 'oto/damage.mp3';/*不正解音*/
 const aGong1 = new Audio();
-aGong1.src = '../eikaiwa/oto/gong.mp3';
+aGong1.src = 'oto/gong.mp3';
 const aGong2 = new Audio();
-aGong2.src = '../eikaiwa/oto/gong3.mp3';
+aGong2.src = 'oto/gong3.mp3';
 const aDamageHime = new Audio();
-aDamageHime.src = '../eikaiwa/oto/abunai.mp3';
+aDamageHime.src = 'oto/abunai.mp3';
 const aDamageChokobo = new Audio();
-aDamageChokobo.src = '../eikaiwa/oto/kaa.mp3';
+aDamageChokobo.src = 'oto/kaa.mp3';
 const aDamageZonbie = new Audio();
 aDamageZonbie.src = 'oto/zonbie.mp3';
 aDamageZonbie.playbackRate = 2;
@@ -77,7 +77,7 @@ const aHeroSaidan = [
 	tamanegi2,
 	tamanegi3
 ];
-const senshi1 = 	new Monster('images/heroSenshi1.png',[rtaiatari],[1],oVoice);
+const senshi1 = 	new Monster('images/heroSenshi1.png',[rtaiatari,rken],[0.3,0.7],oVoice);
 const monk = 		new Monster('images/heroMonk.png',[rtaiatari],[1],oVoice);
 const shiro = 		new Monster('images/heroShiromadoushi.png',[rmahou],[1],oVoice);
 const kuro = 		new Monster('images/heroKuromadoushi.png',[rmahou],[1],oVoice);
@@ -130,6 +130,7 @@ const bgNept = 'images/bgNept.png';
 const bgUmiFuyuu = 'images/bgUmiFuyuu.png';
 const bgGurugan = 'images/bgGurugan.png';
 const bgOen = 'images/bgOen.png';
+const bgDowaf = 'images/bgDowaf.png';
 
 /*for QUESTION*/
 const q1 = [
@@ -629,7 +630,7 @@ const aEnemyGurugan = [
 /*オーエンの塔*/
 const bloodbad = new Monster('images/oenBloodbad.png',[taiatari],[1],oVoiceZonbie);
 const ohishuki = new Monster('images/oenOhishuki.png',[taiatari],[1],oVoiceZonbie);
-const putimeiji = new Monster('images/oenPutimeiji.png',[taiatari],[1],oVoiceZonbie);
+const putimeiji = new Monster('images/oenPutimeiji.png',[taiatari,mahou],[0.3,0.7],oVoiceZonbie);
 const fajarugu = new Monster('images/oenFajarugu.png',[taiatari],[1],oVoiceZonbie);
 const aEnemyOen = [
 	bloodbad,
@@ -637,9 +638,32 @@ const aEnemyOen = [
 	putimeiji,
 	fajarugu
 ];
-const medhusa = new Monster('images/oenMedhusa.png',[taiatari],[1],oVoiceZonbie);
+const medhusa = new Monster('images/oenMedhusa.png',[taiatari,mahou],[0.5,0.5],oVoiceZonbie);
 const aEnemyOenBoss = [
 	medhusa
+];
+/*オーエンの塔の後の海*/
+const tangi = new Monster('images/umiTangi.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyUmiOen = [
+	sahagin,
+	kirafish,
+	sierementaru,
+	tangi
+];
+/*ドワーフの洞窟*/
+const  bomu = new Monster('images/dowafBomu.png',[taiatari],[1],oVoiceZonbie);
+const  maman = new Monster('images/dowafMaman.png',[taiatari],[1],oVoiceZonbie);
+const  shounyuuseki = new Monster('images/dowafShounyuuseki.png',[taiatari],[1],oVoiceZonbie);
+const  manthikora = new Monster('images/dowafManthikora.png',[taiatari],[1],oVoiceZonbie);
+const  gukko = new Monster('images/dowafGukko.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyDowaf = [
+	bomu,
+	maman,
+	shounyuuseki,
+	manthikora
+];
+const aEnemyDowafBoss = [
+	gukko
 ];
 
 let battles;/*onclickの中で使う*/
@@ -674,7 +698,6 @@ onload = function() {
 		mahouHero:document.getElementById('mahouH')
 	};
 	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
-	/*
 	//祭壇の洞窟
 	battles.store('(1)','201821',q1,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
 	battles.store('(2)','201822',q2,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
@@ -718,7 +741,6 @@ onload = function() {
 	battles.store('(26,27,28 -3)','201822',q272829_3,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
 	battles.store('(26,27,28 -4)','201822',q272829_4,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
 	battles.store('(26,27,28 -last)','201822',q272829_5,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
-	*/
 	//オーエンの塔
 	battles.store('(30)','201822',q30,oSound,aEnemyOen,aHeroOen,bgOen);
 	battles.store('(31)','201822',q31,oSound,aEnemyOen,aHeroOen,bgOen);
