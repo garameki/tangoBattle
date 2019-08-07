@@ -117,6 +117,13 @@ const aHeroOen = [
 	shiro,
 	kuro
 ];
+const senshi2 = new Monster('images/heroSenshi2.png',[rken],[1],oVoice);
+const aHeroDowaf = [
+	senshi2,
+	monk,
+	shiro,
+	kuro
+];
 	
 
 /*各シーンの背景*/
@@ -746,7 +753,14 @@ onload = function() {
 	battles.store('(31)','201822',q31,oSound,aEnemyOen,aHeroOen,bgOen);
 	battles.store('(32)','201822',q32,oSound,aEnemyOen,aHeroOen,bgOen);
 	battles.store('(33)','201822',q33,oSound,aEnemyOenBoss,aHeroOen,bgOen);
-
+	/*
+	//オーエンの塔の後の海
+	battles.store('(34)','201822',q34,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(35)','201822',q35,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(36)','201822',q36,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(37)','201822',q37,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(38)','201822',q38,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	*/
 
 
 	battles.start();
