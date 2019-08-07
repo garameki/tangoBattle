@@ -1,9 +1,9 @@
 
 const audioTaiatariM = new Audio();
-audioTaiatariM.src = 'oto/taiatariM.mp3';
+audioTaiatariM.src = 'oto/ashioto2.mp3';
 audioTaiatariM.playbackRate = 15.0;
 const audioTaiatariD = new Audio();
-audioTaiatariD.src = 'oto/rmahouD.mp3';
+audioTaiatariD.src = 'oto/punch.mp3';
 audioTaiatariD.volume = 0.3;
 function taiatari() {
 	audioTaiatariM.currentTime = 0;
@@ -27,7 +27,7 @@ function taiatari() {
 };
 
 const audioTaiatari = new Audio();
-audioTaiatari.src = 'oto/taiatari.mp3';
+audioTaiatari.src = 'oto/ashioto.mp3';
 audioTaiatari.playbackRate = 15.0;
 function rtaiatari() {
 	audioTaiatari.currentTime = 0;
@@ -51,16 +51,17 @@ function rtaiatari() {
 };
 
 const audioRmahou = new Audio();
-audioRmahou.src = 'oto/rmahou.mp3';
+audioRmahou.src = 'oto/mahouThrow.mp3';
 audioRmahou.volume = 0.5;
 const audioRmahouD = new Audio();
-audioRmahouD.src = 'oto/rmahouD.mp3';
+audioRmahouD.src = 'oto/mahouAttack.mp3';
 function mahou() {
 	audioRmahou.currentTime = 0;
 	audioRmahou.play();
 	const tt = 300;
 	this.mE.appearElement(0,Canv.MIDDLE,100);
 	this.mE.move(0,tt,this.dist,0);
+	this.eE.goback(100,-30,0.1);//0.1秒で行って帰る
 	this.mE.puwa(200);
 	this.mE.disappear(500,500);
 	this.mE.move(600,0,-this.dist,0);
@@ -96,4 +97,16 @@ function rmahou() {
 		myself.monster.scream();
 	},tt);
 	return tt;
+};
+
+const audioRken = new Audio();
+audioRken.src = 'oto/sword.mp3';
+function rken() {
+	audioRken.currentTime = 0;
+	audioRken.play();
+	this.eH.goback(-this.dist,0,0.1);
+	this.mH.move(0,0,-this.dist+100,50);
+	this.mH.cut();
+	this.eE.vibrate(100);
+	this.mH.move(800,0,this.dist-100,-50);
 };
