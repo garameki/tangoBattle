@@ -82,11 +82,11 @@ function rmahou() {
 	audioRmahou.play();
 //	this.mH.appearElement(0,Canv.MIDDLE,1000);//100掛けてフェードイン
 	const tt = 300;
-	this.mH.move(0,tt,-this.dist,0);//0待ってから300掛けてthis.dist移動
+	this.mH.move(0,tt,-this.dist-100,0);//0待ってから300掛けてthis.dist移動
 	this.eH.goback(-100,-30,0.1);//0.1秒で行って帰る
 	this.mH.puwa('#666666');//200の円を描く
 //	this.mH.disappear(500,500);//500s後に500s掛けてフェードアウト
-	this.mH.move(600,0,this.dist,0);//1000s後に500sかけて-this.dist動く
+	this.mH.move(600,0,this.dist+100,0);//1000s後に500sかけて-this.dist動く
 	this.eE.vibrate(tt);
 	const myself = this;
 	const fuga = setTimeout(()=>{
@@ -105,8 +105,8 @@ function rken() {
 	audioRken.currentTime = 0;
 	audioRken.play();
 	this.eH.goback(-this.dist,0,0.1);
-	this.mH.move(0,0,-this.dist+100,50);
+	this.mH.move(0,0,-this.dist-100,50);
 	this.mH.cut();
 	this.eE.vibrate(100);
-	this.mH.move(800,0,this.dist-100,-50);
+	this.mH.move(800,0,this.dist+100,-50);
 };
