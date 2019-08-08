@@ -82,4 +82,6 @@ button {
 #words {
 	float:left;
 }
-
+.red {
+	color:red;
+}
