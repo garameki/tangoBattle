@@ -64,6 +64,38 @@ Canv.prototype.cut = function(sColor) {
 			//this.ctx.fill();
 		//this.ctx.arc(0,0,this.ctx.canvas.offsetWidth,this.ctx.canvas.offsetHeight);
 };
+Canv.prototype.uzu = function() {
+	const myself = this;
+	let cx = this.ctx.canvas.offsetWidth/2;
+	let cy = this.ctx.canvas.offsetHeight/2;
+	let radius;
+	if(cx < cy) radius = cx;
+	else radius = cy;
+	
+	const PI = Math.PI / 180;
+	const aa = 90 * PI;/*(degree)*/
+	const N = 5;
+	let count = 0;
+	let cos,sin;
+	let bb = 0;
+	this.element.style.opacity = '1';
+	const hogeC = setInterval(()=>{
+		myself.ctx.clearRect(0,0,cx*2,cy*2);
+		for(let tt=0;tt<360*N;tt+=15) {
+			cos = Math.cos(PI * (tt-bb) + (1 - (tt+bb)/360/N) * aa);
+			sin = Math.sin(PI * (tt-bb) + (1 - (tt+bb)/360/N) * aa);
+			myself.ctx.fillStyle = 'rgba('+(255-Math.round(Math.random()*100)).toString()+','+(255-Math.round(Math.random()*100)).toString()+','+(255-Math.round(Math.random()*100)).toString()+',1)';
+			myself.ctx.fillRect(radius * tt/360/N * cos + cx,radius * tt/360/N * sin + cy,5,5);
+		}
+		if(bb > 360) clearInterval(hogeC);
+		bb += 10;
+	},15);
+	setTimeout(()=>{
+		myself.ctx.clearRect(0,0,cx*2,cy*2);
+	},15 * 36+50);
+
+};
+
 
 
 /**********************************************************

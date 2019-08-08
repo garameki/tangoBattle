@@ -99,6 +99,29 @@ function rmahou() {
 	return tt;
 };
 
+
+function rmahou2() {
+	audioRmahou.currentTime = 0;
+	audioRmahou.play();
+//	this.mH.appearElement(0,Canv.MIDDLE,1000);//100掛けてフェードイン
+	const tt = 300;
+	this.mH.move(0,tt,-this.dist-100,0);//0待ってから300掛けてthis.dist移動
+	this.eH.goback(-100,-30,0.1);//0.1秒で行って帰る
+	this.mH.uzu();
+//	this.mH.disappear(500,500);//500s後に500s掛けてフェードアウト
+	this.mH.move(600,0,this.dist+100,0);//1000s後に500sかけて-this.dist動く
+	this.eE.vibrate(tt);
+	const myself = this;
+	const fuga = setTimeout(()=>{
+		audioRmahouD.currentTime = 0;
+		audioRmahouD.play();
+	},tt);
+	const fugaScream = setTimeout(()=>{
+		myself.monster.scream();
+	},tt);
+	return tt;
+};
+
 const audioRken = new Audio();
 audioRken.src = 'oto/sword.mp3';
 function rken() {
