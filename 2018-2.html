@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css1.css">
+		<!--class,function and extension-->
+		<script type="application/javascript" src="qmain.js"></script>
+		<script type="application/javascript" src="battle.js"></script>
+		<script type="application/javascript" src="image_ext.js"></script>
+		<script type="application/javascript" src="battles.js"></script>
+		<script type="application/javascript" src="canvas_ext.js"></script>
+		<script type="application/javascript" src="attackEnemy.js"></script>
+		<script type="application/javascript" src="monster.js"></script>
+		<!--prepare pars for class and build them by using class-->
+		<script type="application/javascript" src="sound.js"></script>
+		<script type="application/javascript" src="aEnemy.js"></script>
+		<script type="application/javascript" src="aHero.js"></script>
+		
+		<script type="application/javascript" src="questions2018-2.js"></script>
+
+		<script type="application/javascript">
+
+
+/*********************************************************************
+ **	ページ用コンテンツ
+ *********************************************************************/
+/*英検２級2018年第2回*/
+const htmlGrade = "２";
+const htmlYear = '2018';
+const htmlNumber = '2';
+const htmlLinkPrevious = "#";/*いまのところなし*/
+const htmlLinkNext = "2018-1.html";
+
+/*********************************************************************
+ ** Battle用コンテンツ
+ *********************************************************************/
+
+	
+
+/*各シーンの背景*/
+const bgSaidan = 'images/bgSaidan.png';
+const bgKasuzu = 'images/bgKasuzu.png';
+const bgSasun = 'images/bgSasun.png';
+const bgFuuin = 'images/bgFuuin.png';
+const bgBahamuto = 'images/bgBahamuto.png';
+const bgTozasu = 'images/bgTozasu.png';
+const bgNept = 'images/bgNept.png';
+const bgUmiFuyuu = 'images/bgUmiFuyuu.png';
+const bgGurugan = 'images/bgGurugan.png';
+const bgOen = 'images/bgOen.png';
+const bgDowaf = 'images/bgDowaf.png';
+
+
+
+let battles;/*onclickの中で使う*/
+onload = function() {
+	
+	let ele;
+
+	/* 前回リンク */
+	ele = document.getElementById('previous');
+	ele.href = htmlLinkPrevious;
+	/* 次回リンク */
+	ele = document.getElementById('next');
+	ele.href = htmlLinkNext;
+
+
+	/*battle fieldの用意*/
+	const eFieldDiv = document.getElementById('battleField');
+	prepareField(eFieldDiv);
+	//window.addEventListener('resize',prepareField);
+
+	/*エレメントの用意*/
+	eWordsAns = document.getElementById('wordsans');/* global */
+	const oElement = {
+		answer:eWordsAns,
+		word:document.getElementById('words'),
+		list:document.getElementById('wordslist'),
+		enemy:document.getElementById('enemy'),
+		hero:document.getElementById('hero'),
+		battleField:document.getElementById('battleField'),
+		title:document.getElementById('title'),
+		mahouEnemy:document.getElementById('mahouE'),
+		mahouHero:document.getElementById('mahouH')
+	};
+	battles = new Battles(oElement,'英検'+htmlGrade+'級 '+htmlYear+'年 第'+htmlNumber+'回 ');/*年と第何回か*/
+	/*
+	//祭壇の洞窟
+	battles.store('(1)','201821',q1,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(2)','201822',q2,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(21)','201822',q21,oSound,aEnemySaidanBoss,aHeroSaidan,bgSaidan);
+	battles.store('(3)','201822',q3,oSound,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(4)','201822',q4,oSound,aEnemySaidan2,aHeroSaidan,bgSaidan);
+	battles.store('(5)','201822',q5,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	battles.store('(6)','201822',q6,oSound,aEnemySaidan1,aHeroSaidan,bgSaidan);
+	//カスズ
+	battles.store('(7)','201822',q7,oSound,aEnemyKasuzu,aHeroKanan,bgKasuzu);
+	battles.store('(8)','201822',q8,oSound,aEnemyKasuzu,aHeroKanan,bgKasuzu);
+	//サスーン城
+	battles.store('(9)','201822',q9,oSound,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(10)','201822',q10,oSound,aEnemySasun,aHeroSaidan,bgSasun);
+	battles.store('(22)','201822',q22,oSound,aEnemySasunBoss,aHeroSaidan,bgSasun);
+	//封印の洞窟
+	battles.store('(11)','201822',q11,oSound,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(12)','201822',q12,oSound,aEnemyFuuin1,aHeroSaidan,bgFuuin);
+	battles.store('(13)','201822',q13,oSound,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(14)','201822',q14,oSound,aEnemyFuuin2,aHeroSaidan,bgFuuin);
+	battles.store('(23)','201822',q23,oSound,aEnemyFuuinBoss,aHeroKanan,bgFuuin);
+	//サスーン カヌー
+	battles.store('(15)','201822',q15,oSound,aEnemySasun,aHeroSaidan,bgKasuzu);
+	battles.store('(16)','201822',q16,oSound,aEnemySasun,aHeroSaidan,bgKasuzu);
+	//バハムート
+	battles.store('(17)','201822',q17,oSound,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(18)','201822',q18,oSound,aEnemyBahamuto,aHeroSaidan,bgBahamuto);
+	battles.store('(24)','201822',q24,oSound,aEnemyBahamutoBoss1,aHeroSaidan,bgBahamuto);
+	battles.store('(25)','201822',q25,oSound,aEnemyBahamutoBoss2,aHeroSaidan,bgBahamuto);
+	//トーザスの抜け道
+	battles.store('(19)','201822',q19,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	battles.store('(20)','201822',q20,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	*/
+	battles.store('(26-1)','201822',q26_1,oSound,aEnemyTozasu,aHeroTozasu,bgTozasu);
+	//ネプト神殿
+	battles.store('(26-2)','201822',q26_2,oSound,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-3)','201822',q26_3,oSound,aEnemyNept,aHeroNept,bgNept);
+	battles.store('(26-last)','201822',q26_4,oSound,aEnemyNeptBoss,aHeroNept,bgNept);
+	//グルガン族まで
+	battles.store('(26,27,28 -1)','201822',q272829_1,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -2)','201822',q272829_2,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -3)','201822',q272829_3,oSound,aEnemyUmiFuyuu,aHeroUmiFuyuu,bgUmiFuyuu);
+	battles.store('(26,27,28 -4)','201822',q272829_4,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
+	battles.store('(26,27,28 -last)','201822',q272829_5,oSound,aEnemyGurugan,aHeroGurugan,bgGurugan);
+	//オーエンの塔
+	battles.store('(30)','201822',q30,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(31)','201822',q31,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(32)','201822',q32,oSound,aEnemyOen,aHeroOen,bgOen);
+	battles.store('(33)','201822',q33,oSound,aEnemyOenBoss,aHeroOen,bgOen);
+	//オーエンの塔の後の海
+	battles.store('(34)','201822',q34,oSound,aEnemyUmiOen,aHeroDowaf,bgUmiFuyuu);
+	//ドワーフの洞窟
+	battles.store('(35)','201822',q35,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(36)','201822',q36,oSound,aEnemyDowaf,aHeroDowaf,bgDowaf);
+	battles.store('(37)(38)','201822',q3738,oSound,aEnemyDowafBoss,aHeroDowaf,bgDowaf);
+
+
+	battles.start();
+
+};
+
+
+
+		</script>
+	</head>
+	<body>
+		<h1 id="title" style="display:inline;"></h1>
+		<div id="battleField" style="background-color:black;">
+				<img id="enemy">
+				<canvas id="mahouE" src="images/senshi.png" style="display:inline;"></canvas>
+				<img id="hero" >
+				<canvas id="mahouH" width=300 height=300  style="display:inline;"></canvas>
+			<div class="clearFloat"></div>
+		</div>
+
+		<div id="words" style="width:20%;padding-left:5%;"></div>
+		<div id="wordsans" style="width:60%;margin-right:10%;margin-top:55px;">　</div>
+		<div class="clearFloat"></div>
+		<div id="wordslist" style="width:100%;margin-top:200px;"></div>
+
+		<center><a id="previous">前回</a>&nbsp;&nbsp;&nbsp;<a id="next">次回</a>
+		</center>
+		<br><br><br>
+
+
+	</body>
+</html>
