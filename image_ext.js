@@ -129,3 +129,33 @@ Image.prototype.goback = function(xx,yy,time) {
 	},time*1000/div);
 };
 
+/*************************************************
+ ** Canv エレメントを往復させる
+ ** あらかじめtopとleftを指定してから呼び出すこと
+ ** xx ... x方向の移動距離
+ ** yy ... y方向の移動距離
+ ** lenTime ... かける時間
+ ** diffTime ... 秒後に開始(*0.001)
+**************************************************/
+Image.prototype.move = function(diffTime,lenTime,xx,yy) {
+	const myself = this;
+	let sLeft='',sTop='';
+	const div = 10;/*コマの数*/
+	let count = 0;
+	const fugaMove = setTimeout(()=>{
+		const beforeTop = this.style.top;
+		const top = Number(beforeTop.match(/\-*\d+(?:\.\d+)*/)[0]);
+		const ddy = yy / div;
+		const beforeLeft = this.style.left;
+		const left = Number(beforeLeft.match(/\-*\d+(?:\.\d+)*/)[0]);
+		const ddx = xx / div;
+		const hogeMove = setInterval(()=>{
+			if(++count >= div) clearInterval(hogeMove);
+			sLeft = (Math.round(left + ddx * count)).toString() + 'px';
+			sTop = (Math.round(top + ddy * count)).toString() + 'px';
+			myself.style.position = 'relative';
+			myself.style.top = sTop;
+			myself.style.left = sLeft;
+		},lenTime/div);
+	},diffTime);
+};

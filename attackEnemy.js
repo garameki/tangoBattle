@@ -133,3 +133,13 @@ function rken() {
 	this.eE.vibrate(100);
 	this.mH.move(800,0,this.dist+100,-50);
 };
+
+function rjumpkick() {
+//	audioTaiatari.currentTime = 0;
+//	audioTaiatari.play();
+	this.eH.move(0,0,0,30);
+	this.eH.move(200,100,0,-380);
+	this.eH.move(500,50,-this.dist-20,350);
+	this.eE.vibrate(500);
+	this.eH.move(700,500,this.dist+20,0);
+};

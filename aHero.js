@@ -69,3 +69,15 @@ const aHeroMizu = [
 	kuro,
 	eria
 ];
+const derira = new Monster('images/heroDerira.png',[rmahou2],[1],oVoice);
+const hage = new Monster('images/heroHage.png',[rmahou2],[1],oVoice);
+const aHeroGesui = [
+	derira,
+	hage
+];
+//const  = new Monster('images/hero.png',[rmahou2],[1],oVoice);
+const ryukisi = new Monster('images/heroRyukisi.png',[rjumpkick],[1],oVoice);
+const aHeroGorutoru = [
+	ryukisi
+];
+

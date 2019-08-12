@@ -57,6 +57,8 @@ const bgAgasu = 'images/bgAgasu.png';/*古代人の歯車get*/
 const bgKanan = 'images/bgKanan.png';/*シドが船を作ってくれる*/
 const bgNanpasen = 'images/bgNanpasen.png';
 const bgMizu = 'images/bgMizu.png';/*水の神殿*/
+const bgGesui = 'images/bgGesui.png';/*アルムの下水*/
+const bgGorutoru = 'images/bgGorutoru.png';/*アルムの下水*/
 
 
 let battles;/*onclickの中で使う*/
@@ -96,8 +98,10 @@ onload = function() {
 	battles.store('(1)' ,'2018101',q1 ,oSound,aEnemyHono,aHeroDowaf,bgHono);
 	battles.store('(2)' ,'2018102',q2 ,oSound,aEnemyHono,aHeroDowaf,bgHono);
 	battles.store('(3)' ,'2018103',q3 ,oSound,aEnemyHono,aHeroDowaf,bgHono);
+	*/
 	battles.store('(4)' ,'2018104',q4 ,oSound,aEnemyHonoBoss,aHeroDowaf,bgHono);
 	battles.store('(5)' ,'2018105',q5 ,oSound,aEnemyUmiHono,aHeroDowaf,bgUmiFuyuu);
+	/*
 	battles.store('(6)' ,'2018106',q6 ,oSound,aEnemyUmiHono,aHeroDowaf,bgUmiFuyuu);
 	//ハインの城
 	battles.store('(7)' ,'2018107',q7 ,oSound,aEnemyHain,aHeroDowaf,bgHain);
@@ -121,7 +125,6 @@ onload = function() {
 	//カナーンのシドに船をつくってもらう
 	battles.store('(19)','2018119',q19,oSound,aEnemyBahamuto,aHeroSido,bg);
 	battles.store('(20)','2018120',q20,oSound,aEnemyBahamuto,aHeroSido,bg);
-	*/
 	//難破船
 	battles.store('(21)','2018121',q21,oSound,aEnemyUmi2,aHeroEria,bgNanpasen);
 	//水の神殿
@@ -134,6 +137,19 @@ onload = function() {
 	battles.store('(28)','2018128',q28,oSound,aEnemyMizu,aHeroMizu,bgMizu);
 	battles.store('(29)','2018129',q29,oSound,aEnemyMizu,aHeroMizu,bgMizu);
 	battles.store('(30)','2018130',q30,oSound,aEnemyMizuBoss,aHeroMizu,bgMizu);
+	battles.store('(30)','2018130',q30,oSound,aEnemyMizuBoss,aHeroMizu,bgMizu);
+	//アルムの下水道
+	battles.store('(30)','2018130',q30,oSound,aEnemyGesui,aHeroGesui,bgGesui);
+	battles.store('(31)','2018131',q31,oSound,aEnemyGesuiGoburin,aHeroGesui,bgGesui);
+	battles.store('(32)','2018132',q32,oSound,aEnemyGesui,aHeroGesui,bgGesui);
+	battles.store('(33)','2018133',q33,oSound,aEnemyGesui,aHeroGesui,bgGesui);
+	battles.store('(34)','2018134',q34,oSound,aEnemyGesui,aHeroGesui,bgGesui);
+	battles.store('(35)','2018135',q35,oSound,aEnemyGesuiBoss,aHeroGesui,bgGesui);
+	//ゴールドルの館
+	battles.store('(36)','2018136',q36,oSound,aEnemyGorutoru,aHeroGorutoru,bgGorutoru);
+	battles.store('(37)','2018137',q37,oSound,aEnemyGorutoru,aHeroGorutoru,bgGorutoru);
+	battles.store('(38)','2018138',q38,oSound,aEnemyGorutoruBoss,aHeroGorutoru,bgGorutoru);
+	*/
 
 	battles.start();
 

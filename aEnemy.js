@@ -210,6 +210,58 @@ const aEnemyUmi2 = [
 	ogurohai,
 	satujinyadokari
 ];
+/*アルムの下水道*/
+const  sutoropa = new Monster('images/gesuiSutoropa.png',[taiatari],[1],oVoiceZonbie);
+const  goburins = new Monster('images/gesuiGoburin.png',[taiatari],[1],oVoiceZonbie);
+const  gigantodo = new Monster('images/gesuiGigantodo.png',[taiatari],[1],oVoiceZonbie);
+const  dakufutto = new Monster('images/gesuiDakufutto.png',[taiatari],[1],oVoiceZonbie);
+const  twinlaiga = new Monster('images/gesuiTwinlaiga.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyGesui = [
+	sutoropa,
+	gigantodo,
+	dakufutto
+];
+const aEnemyGesuiGoburin = [
+	goburins
+];
+const aEnemyGesuiBoss = [
+	twinlaiga
+];
+/*ゴールトルの館*/
+const goldbea = new Monster('images/gorutoruGoldbea.png',[taiatari],[1],oVoiceZonbie);
+const gorutoru = new Monster('images/gorutoruGorutoru.png',[taiatari],[1],oVoiceZonbie);
+const aEnemyGorutoru = [
+	goldbea
+];
+const aEnemyGorutoruBoss = [
+	gorutoru
+];
+
+/************************************** 未処理 ********************************************************************************/
+/*サロニアのチンピラ*/
+const goldnight = new Monster('images/saroniaGoldnight.png',[taiatari],[1],oVoiceZonbie);
+
+
+
+//const  = new Monster('images/.png',[taiatari],[1],oVoiceZonbie);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*海底洞窟*/
 const  desukuro = new Monster('images/kaiteiDesukuro.png',[taiatari],[1],oVoiceZonbie);
 const  ita = new Monster('images/kaiteiIta.png',[taiatari],[1],oVoiceZonbie);
